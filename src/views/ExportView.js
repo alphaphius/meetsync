@@ -226,10 +226,10 @@ function buildReport(meetings, sec) {
         <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:#767683;margin:0 0 8px;">Meeting Notes</div>
         <div class="ms-report-body">${sanitizeHTML(m.summary)}</div>
       </div>` : ''}
-      ${sec.files && (m.attachments || []).length ? `
+      ${sec.files && (m.attachments || []).some((a) => a.fileId) ? `
       <div style="margin-top:14px;">
-        <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:#767683;margin-bottom:8px;">Attachments (${m.attachments.length})</div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;">${m.attachments.slice(0, 9).map((a) => `<img src="${esc(a.fileId ? driveThumb(a.fileId, 160) : '')}" style="width:84px;height:84px;object-fit:cover;border-radius:8px;border:1px solid #e4e1ea;" />`).join('')}</div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:#767683;margin-bottom:8px;">Attachments (${m.attachments.filter((a) => a.fileId).length})</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">${m.attachments.filter((a) => a.fileId).slice(0, 9).map((a) => `<img src="${esc(driveThumb(a.fileId, 160))}" style="width:84px;height:84px;object-fit:cover;border-radius:8px;border:1px solid #e4e1ea;" />`).join('')}</div>
       </div>` : ''}
     </div>`;
   wrap.innerHTML = `

@@ -174,13 +174,18 @@ export default {
     }
 
     function renderAttachments() {
-      attachBox.innerHTML = state.attachments.map((a, i) => `
+      attachBox.innerHTML = state.attachments.map((a, i) => {
+        const src = a.preview || (a.fileId ? driveThumb(a.fileId, 240) : '');
+        const body = src
+          ? `<img src="${escapeHtml(src)}" alt="${escapeHtml(a.name || 'attachment')}" class="w-full h-full object-cover" loading="lazy" decoding="async" />`
+          : `<div class="w-full h-full flex flex-col items-center justify-center gap-1 bg-surface-container-highest">${icon('broken_image', 'text-[26px] text-on-surface-variant')}<span class="px-1 text-center text-[9px] text-outline leading-tight">image lost<br>re-add</span></div>`;
+        return `
         <div class="relative w-24 h-24 rounded-xl border border-outline-variant overflow-hidden group shrink-0">
-          <img src="${escapeHtml(a.preview || (a.fileId ? driveThumb(a.fileId, 240) : ''))}" alt="${escapeHtml(a.name || 'attachment')}"
-            class="w-full h-full object-cover" loading="lazy" decoding="async" />
+          ${body}
           ${a.data ? `<span class="absolute top-1 left-1 bg-surface-container-highest/90 text-on-surface rounded-full px-1.5 py-0.5 text-[10px] font-semibold">new</span>` : ''}
           <button data-remove="${i}" class="absolute top-1 right-1 bg-surface-container-highest/90 text-on-surface p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" aria-label="Remove">${icon('close', 'text-[14px]')}</button>
-        </div>`).join('') +
+        </div>`;
+      }).join('') +
         `<button data-add-image-2 class="w-24 h-24 rounded-xl border-2 border-dashed border-outline-variant flex flex-col items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary transition-colors shrink-0">
           ${icon('add', 'text-[24px]')}<span class="text-[11px] font-medium">Add</span></button>`;
     }
