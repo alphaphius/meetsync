@@ -89,6 +89,19 @@ function setup() {
 
 function ensureAll() {
   SHEET_DEFS.forEach(function (def) { ensureSheet(def[0], def[1]); });
+  // Meetings date/time columns must stay plain text, or Sheets will coerce
+  // "2026-08-13" / "09:00" into Date cells (breaks calendar keys on read-back).
+  var msh = SS().getSheetByName('Meetings');
+  var mHeaders = headersOf(msh);
+  var mDateCol = mHeaders.indexOf('date');
+  var mTimeCol = mHeaders.indexOf('time');
+  var mEndCol = mHeaders.indexOf('endTime');
+  if (mDateCol >= 0 || mTimeCol >= 0 || mEndCol >= 0) {
+    var mRows = Math.max(2, msh.getLastRow());
+    if (mDateCol >= 0) msh.getRange(2, mDateCol + 1, mRows, 1).setNumberFormat('@');
+    if (mTimeCol >= 0) msh.getRange(2, mTimeCol + 1, mRows, 1).setNumberFormat('@');
+    if (mEndCol >= 0) msh.getRange(2, mEndCol + 1, mRows, 1).setNumberFormat('@');
+  }
   var folder = getOrCreateFolder();
   try { folder.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); } catch (e) {}
   ensureConfig(FOLDER_ID_KEY, folder.getId());
@@ -203,6 +216,46 @@ function upsertRow(sheet, key, value, data) {
   return row;
 }
 
+// Sheets auto-coerces date-like strings ("2026-08-13") and times ("09:00")
+// into Date cells. Reading them back yields Date objects that serialize to
+// UTC ISO strings ("2026-08-12T17:00:00.000Z"), breaking calendar lookups
+// (keyed on YYYY-MM-DD) and shifting the day in UTC+ timezones.
+// These helpers renormalize to plain "YYYY-MM-DD" / "HH:MM" strings.
+function fmtDate(d) {
+  if (d instanceof Date) {
+    return String(d.getFullYear()) + '-' +
+      String(d.getMonth() + 1).padStart(2, '0') + '-' +
+      String(d.getDate()).padStart(2, '0');
+  }
+  var s = String(d || '');
+  var m = s.match(/^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/);
+  if (m) {
+    var dt = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]));
+    return String(dt.getFullYear()) + '-' +
+      String(dt.getMonth() + 1).padStart(2, '0') + '-' +
+      String(dt.getDate()).padStart(2, '0');
+  }
+  return s;
+}
+
+function fmtTime(t) {
+  if (t instanceof Date) {
+    return String(t.getHours()).padStart(2, '0') + ':' + String(t.getMinutes()).padStart(2, '0');
+  }
+  var s = String(t || '');
+  var m = s.match(/(?:T|\s)(\d{2}):(\d{2})/);
+  if (m) return m[1] + ':' + m[2];
+  if (/^\d{1,2}:\d{2}/.test(s)) return String(s.split(':')[0]).padStart(2, '0') + ':' + s.split(':')[1];
+  return s;
+}
+
+function normalizeMeeting(m) {
+  if (m.date) m.date = fmtDate(m.date);
+  if (m.time) m.time = fmtTime(m.time);
+  if (m.endTime) m.endTime = fmtTime(m.endTime);
+  return m;
+}
+
 /* ---------- Config / Settings ---------- */
 // PIN is stored prefixed ("P:") because Sheets coerces "0000" to number 0.
 function getPin() {
@@ -262,7 +315,7 @@ function saveSettings(body) {
 /* ---------- Dashboard ---------- */
 function getDashboard() {
   var projects = readAll(PROJECTS());
-  var meetings = readAll(MEETINGS()).filter(function (m) { return m.deleted !== true && m.deleted !== 'TRUE' && m.deleted !== 'true'; });
+  var meetings = readAll(MEETINGS()).filter(function (m) { return m.deleted !== true && m.deleted !== 'TRUE' && m.deleted !== 'true'; }).map(normalizeMeeting);
   var contacts = readAll(CONTACTS());
   var groups   = readAll(GROUPS());
   var settings = readSettings();
@@ -298,7 +351,7 @@ function getMeetings(params) {
     return true;
   });
   out.sort(function (a, b) { return ((b.date || '') + ' ' + (b.time || '')).localeCompare((a.date || '') + ' ' + (a.time || '')); });
-  return json({ ok: true, meetings: out });
+  return json({ ok: true, meetings: out.map(normalizeMeeting) });
 }
 
 /* ---------- Projects ---------- */
@@ -366,7 +419,7 @@ function saveMeeting(body) {
     if (prev && prev.createdAt) { data.createdAt = prev.createdAt; SS().getSheetByName('Meetings').getRange(row, headers.indexOf('createdAt') + 1).setValue(prev.createdAt); }
   }
   var saved = readAll(MEETINGS()).filter(function (x) { return x.id === data.id; })[0];
-  return { ok: true, meeting: saved, row: row };
+  return { ok: true, meeting: normalizeMeeting(saved), row: row };
 }
 
 function deleteMeeting(body) {

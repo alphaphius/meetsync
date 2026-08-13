@@ -47,6 +47,25 @@ function persist() {
   }
 }
 
+function normalizeDate(d) {
+  if (!d) return d;
+  const s = String(d);
+  const m = s.match(/^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})/);
+  if (m) {
+    const dt = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4], +m[5]));
+    return `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+  }
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : d;
+}
+
+function normalizeTime(t) {
+  if (!t) return t;
+  const s = String(t);
+  const m = s.match(/(?:T|\s)(\d{2}):(\d{2})/);
+  if (m) return `${m[1]}:${m[2]}`;
+  return /^\d{1,2}:\d{2}/.test(s) ? s.replace(/^(\d{1,2}):/, (_, h) => String(h).padStart(2, '0')) : t;
+}
+
 export const store = {
   get: () => state,
   subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); },
@@ -65,10 +84,16 @@ export const store = {
   hydrate(data) {
     const settings = data.settings ? { ...data.settings } : null;
     if (settings && settings.pin != null) settings.deletePin = settings.pin;
+    const meetings = (data.meetings ?? state.meetings).map((m) => ({
+      ...m,
+      date: normalizeDate(m.date),
+      time: normalizeTime(m.time),
+      endTime: normalizeTime(m.endTime),
+    }));
     state = {
       ...state,
       projects: data.projects ?? state.projects,
-      meetings: data.meetings ?? state.meetings,
+      meetings,
       contacts: data.contacts ?? state.contacts,
       groups: data.groups ?? state.groups,
       settings: settings ? { ...state.settings, ...settings } : state.settings,
