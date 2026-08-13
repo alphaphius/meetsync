@@ -328,11 +328,11 @@ function deleteProject(body) {
   if (String(body.pin) !== String(pin)) return { ok: false, error: 'Invalid PIN' };
   var id = body.id;
   var row = findRowBy(PROJECTS(), 'id', id);
-  if (row > 0) SS().deleteRow(row);
+  if (row > 0) PROJECTS().deleteRow(row);
   var meetings = readAll(MEETINGS()).filter(function (m) { return m.projectId === id; });
   meetings.forEach(function (m) {
     var r = findRowBy(MEETINGS(), 'id', m.id);
-    if (r > 0) SS().deleteRow(r);
+    if (r > 0) MEETINGS().deleteRow(r);
   });
   return { ok: true, deletedProject: id, deletedMeetings: meetings.length };
 }
