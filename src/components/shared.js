@@ -35,7 +35,7 @@ export function avatarButton(avatar, name) {
 /* ---------------- Bottom Navigation ---------------- */
 const NAV_ITEMS = [
   { key: 'home', label: 'Home', icon: 'home', href: '#/' },
-  { key: 'planner', label: 'Planner', icon: 'calendar_today', href: '#/planner' },
+  { key: 'planner', label: 'Calendar', icon: 'calendar_today', href: '#/planner' },
   { key: 'projects', label: 'Projects', icon: 'folder', href: '#/projects' },
   { key: 'export', label: 'Export', icon: 'ios_share', href: '#/export' },
   { key: 'settings', label: 'Settings', icon: 'settings', href: '#/settings' },

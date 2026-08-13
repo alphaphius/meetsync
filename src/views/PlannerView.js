@@ -23,7 +23,7 @@ function meetingsByDate() {
 
 export default {
   id: 'planner',
-  title: 'Planner',
+  title: 'Calendar',
 
   render() {
     const today = todayStr();
@@ -31,7 +31,7 @@ export default {
     this._state = { year: d.getFullYear(), month: d.getMonth(), selected: today };
     return `
       ${topBarHTML({
-        title: 'Planner',
+        title: 'Calendar',
         left: '',
         right: `<button class="icon-btn" data-search aria-label="Search">${icon('search')}</button>
                 <button class="icon-btn" data-notif aria-label="Notifications">${icon('notifications')}</button>`,
@@ -71,7 +71,6 @@ export default {
     const eventsEl = root.querySelector('[data-events]');
     const monthEl = root.querySelector('[data-month]');
     const titleEl = root.querySelector('[data-events-title]');
-    const map = meetingsByDate();
 
     function build() {
       const byDate = meetingsByDate();
@@ -111,11 +110,11 @@ export default {
       }
       calendar.innerHTML = cells;
       monthEl.textContent = `${MONTHS_TH[s.month]} ${s.year}`;
-      renderEvents();
+      renderEvents(byDate);
     }
 
-    function renderEvents() {
-      const list = (map[s.selected] || []).sort((a, b) => String(a.time).localeCompare(String(b.time)));
+    function renderEvents(byDate) {
+      const list = (byDate[s.selected] || []).sort((a, b) => String(a.time).localeCompare(String(b.time)));
       titleEl.textContent = `Events · ${s.selected.slice(8, 10)} ${MONTHS_TH[s.month]}`;
       if (!list.length) {
         eventsEl.innerHTML = emptyState({ icon: 'event_available', title: 'No meetings', message: 'Nothing scheduled for this day yet.', action: '<a href="#/meetings/new" class="btn btn-primary">Plan a meeting</a>' });
@@ -163,7 +162,7 @@ export default {
 
     build();
 
-    const unsub = store.subscribe(() => { const m = meetingsByDate(); Object.assign(map, m); build(); });
+    const unsub = store.subscribe(() => build());
     return () => { unsub(); };
   },
 };

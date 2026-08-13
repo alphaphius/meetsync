@@ -20,7 +20,6 @@ export default {
     }
     const tone = p.color === 'secondary' ? 'bg-secondary-fixed text-on-secondary-fixed'
       : p.color === 'tertiary' ? 'bg-tertiary-fixed text-on-tertiary-fixed' : 'bg-primary-fixed text-on-primary-fixed';
-    const prog = Math.max(0, Math.min(100, Number(p.progress) || 0));
     return `
       ${topBarHTML({
         title: p.name || 'Project',
@@ -34,13 +33,8 @@ export default {
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-2 flex-wrap">
                 <span class="chip text-[10px]">${escapeHtml(p.category || 'General')}</span>
-                <span class="chip ${p.status === 'completed' ? 'bg-secondary-fixed text-on-secondary-fixed' : 'chip-active'} text-[10px]">${escapeHtml(p.status === 'completed' ? 'Completed' : 'Active')}</span>
               </div>
               <p class="text-[14px] text-on-surface-variant mt-2 leading-relaxed">${escapeHtml(p.description || 'No description.')}</p>
-              <div class="flex items-center gap-2 mt-4">
-                <div class="flex-1 h-2 rounded-full bg-surface-container overflow-hidden"><div class="${tone.split(' ')[0] == 'bg-secondary-fixed' ? 'bg-secondary' : tone.split(' ')[0] == 'bg-tertiary-fixed' ? 'bg-tertiary' : 'bg-primary'} h-full rounded-full" style="width:${prog}%"></div></div>
-                <span class="text-[12px] font-semibold text-on-surface-variant">${prog}%</span>
-              </div>
             </div>
           </div>
         </div>

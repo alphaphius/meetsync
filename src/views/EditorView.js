@@ -280,7 +280,7 @@ export default {
       if (e.target.value === '__new__') {
         const name = prompt('New project name:');
         if (name && name.trim()) {
-          const p = { id: uid('prj'), name: name.trim(), category: 'General', progress: 0, status: 'active', createdAt: new Date().toISOString() };
+          const p = { id: uid('prj'), name: name.trim(), category: 'General', createdAt: new Date().toISOString() };
           store.upsertProject(p);
           queue.enqueueProjectSave(p);
           e.target.value = p.id;
@@ -328,7 +328,6 @@ export default {
           fileId: a.fileId || '', name: a.name || 'image', mime: a.mime || 'image/png', size: a.size || 0,
           data: a.data || (a.fileId ? undefined : a.preview?.startsWith('data:') ? a.preview : undefined),
         })),
-        status: 'done',
         createdAt: existing?.createdAt || new Date().toISOString(),
       };
       store.upsertMeeting(meeting);

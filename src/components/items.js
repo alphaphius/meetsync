@@ -8,8 +8,6 @@ export function projectCard(p) {
   const tone = p.color === 'secondary' ? 'bg-secondary-fixed text-on-secondary-fixed'
     : p.color === 'tertiary' ? 'bg-tertiary-fixed text-on-tertiary-fixed'
     : 'bg-primary-fixed text-on-primary-fixed';
-  const bar = p.color === 'secondary' ? 'bg-secondary' : p.color === 'tertiary' ? 'bg-tertiary' : 'bg-primary';
-  const prog = Math.max(0, Math.min(100, Number(p.progress) || 0));
   return `
     <a href="#/projects/${encodeURIComponent(p.id)}" class="min-w-[270px] max-w-[300px] bg-surface-container-lowest rounded-2xl p-4 shadow-card border border-outline-variant/30 flex-shrink-0 hover:shadow-cardlg transition-all group">
       <div class="flex justify-between items-start mb-3">
@@ -20,12 +18,6 @@ export function projectCard(p) {
       </div>
       <h3 class="text-base font-semibold text-on-surface mb-1 group-hover:text-primary transition-colors">${escapeHtml(p.name || 'Untitled')}</h3>
       <p class="text-[13px] text-on-surface-variant line-clamp-2 mb-3 min-h-[36px]">${escapeHtml(p.description || 'No description yet.')}</p>
-      <div class="flex items-center gap-2">
-        <div class="flex-1 h-1.5 rounded-full bg-surface-container overflow-hidden">
-          <div class="${bar} h-full rounded-full" style="width:${prog}%"></div>
-        </div>
-        <span class="text-[11px] font-semibold text-on-surface-variant">${prog}%</span>
-      </div>
       <div class="flex items-center justify-between mt-2">
         <span class="text-[11px] text-outline">${p.meetingsCount || 0} meetings</span>
         <span class="opacity-0 group-hover:opacity-100 transition-opacity text-primary">${icon('arrow_forward', 'text-[16px]')}</span>

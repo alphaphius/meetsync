@@ -30,7 +30,7 @@ export default {
 
         <section class="mt-6" data-projects>
           <div class="flex items-center justify-between mb-3">
-            <h2 class="text-lg font-semibold text-on-surface">Active Projects</h2>
+            <h2 class="text-lg font-semibold text-on-surface">Projects</h2>
             <a href="#/projects" class="text-sm font-medium text-primary">View all</a>
           </div>
           <div data-projects-body></div>
@@ -56,7 +56,6 @@ export default {
       const s = store.get();
       const q = query.trim().toLowerCase();
       const projects = s.projects
-        .filter((p) => p.status === 'active' || !p.status)
         .filter((p) => !q || (p.name + ' ' + p.description + ' ' + p.category).toLowerCase().includes(q))
         .slice(0, 8);
 
