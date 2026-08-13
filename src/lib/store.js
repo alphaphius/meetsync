@@ -63,7 +63,7 @@ function normalizeTime(t) {
   const s = String(t);
   const m = s.match(/(?:T|\s)(\d{2}):(\d{2})/);
   if (m) return `${m[1]}:${m[2]}`;
-  return /^\d{1,2}:\d{2}/.test(s) ? s.replace(/^(\d{1,2}):/, (_, h) => String(h).padStart(2, '0')) : t;
+  return /^\d{1,2}:\d{2}/.test(s) ? s.replace(/^(\d{1,2}):/, (_, h) => String(h).padStart(2, '0') + ':') : t;
 }
 
 export const store = {
