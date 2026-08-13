@@ -59,6 +59,14 @@ async function bootstrap() {
 /* ---------- PWA ---------- */
 const swUpdateSW = registerSW({ immediate: true });
 swUpdateSW && swUpdateSW.then && swUpdateSW.then(() => {});
+if ('serviceWorker' in navigator) {
+  let swReloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (swReloaded) return;
+    swReloaded = true;
+    window.location.reload();
+  });
+}
 
 /* ---------- Boot ---------- */
 const app = document.getElementById('app');

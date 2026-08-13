@@ -1,8 +1,28 @@
 // Reusable project/meeting card renderers.
 
 import { icon, priorityBadge, avatarStack } from '../lib/ui.js';
-import { escapeHtml, fmtDateTime, PRIORITY } from '../lib/utils.js';
+import { escapeHtml, sanitizeHTML, fmtDateTime, PRIORITY } from '../lib/utils.js';
 import { store } from '../lib/store.js';
+import { driveThumb, driveFull } from '../lib/config.js';
+
+// Best image source for an attachment (fileId → Drive thumb, else local blob).
+export function attachmentSrc(a, w = 240) {
+  if (!a) return '';
+  if (a.fileId) return driveThumb(a.fileId, w);
+  if (a.data && String(a.data).startsWith('data:')) return a.data;
+  if (a.url) return a.url;
+  return '';
+}
+
+export function attachmentThumbs(m, count = 4, size = 'w-16 h-16') {
+  const atts = (m.attachments || []).slice(0, count).filter((a) => attachmentSrc(a));
+  return atts.map((a) => {
+    const src = attachmentSrc(a, 240);
+    const fb = a.fileId ? driveFull(a.fileId) : '';
+    return `<span class="${size} rounded-lg overflow-hidden border border-outline-variant/40 shrink-0 bg-surface-container-high inline-block">
+      <img src="${escapeHtml(src)}" alt="" loading="lazy" decoding="async" class="w-full h-full object-cover" ${fb ? `onerror="this.onerror=null;this.src='${escapeHtml(fb)}'"` : ''} /></span>`;
+  }).join('');
+}
 
 export function projectCard(p) {
   const tone = p.color === 'secondary' ? 'bg-secondary-fixed text-on-secondary-fixed'
@@ -29,6 +49,9 @@ export function meetingCard(m, opts = {}) {
   const bar = PRIORITY[m.priority]?.bar || PRIORITY.medium.bar;
   const projectName = opts.projectName ?? (m.projectId ? store.project(m.projectId)?.name : null);
   const time = fmtDateTime(m.date, m.time);
+  const summary = sanitizeHTML(m.summary || '');
+  const thumbs = attachmentThumbs(m, 4);
+  const attCount = (m.attachments || []).length;
   return `
     <a href="#/meetings/${encodeURIComponent(m.id)}" class="card relative overflow-hidden flex p-4 pl-5 hover:shadow-cardlg transition-all" data-meeting="${escapeHtml(m.id)}">
       <div class="absolute left-0 top-0 bottom-0 w-1.5 ${bar}"></div>
@@ -38,10 +61,12 @@ export function meetingCard(m, opts = {}) {
           <span class="text-[13px] text-on-surface-variant shrink-0">${escapeHtml(time)}</span>
         </div>
         <h3 class="text-[15px] font-semibold text-on-surface mb-0.5 leading-snug">${escapeHtml(m.title || 'Untitled meeting')}</h3>
-        <p class="text-[13px] text-on-surface-variant truncate mb-2.5">${escapeHtml(projectName || 'No project')}</p>
+        ${projectName ? `<p class="text-[12px] text-primary font-medium mb-1.5">${escapeHtml(projectName)}</p>` : ''}
+        ${summary ? `<div class="markdown-body text-[13px] leading-relaxed text-on-surface-variant mt-1 mb-2.5">${summary}</div>` : ''}
+        ${thumbs ? `<div class="flex gap-2 mb-2.5">${thumbs}</div>` : ''}
         <div class="flex items-center gap-2">
           ${avatarStack(m.participants, 8, 3)}
-          ${opts.attachments && (m.attachments || []).length ? `<span class="text-on-surface-variant flex items-center gap-0.5 text-[12px] ml-1">${icon('image', 'text-[16px]')}${m.attachments.length}</span>` : ''}
+          ${attCount ? `<span class="text-on-surface-variant flex items-center gap-0.5 text-[12px] ml-1">${icon('image', 'text-[16px]')}${attCount}</span>` : ''}
         </div>
       </div>
     </a>`;
@@ -49,6 +74,8 @@ export function meetingCard(m, opts = {}) {
 
 export function meetingGridCard(m) {
   const badge = PRIORITY[m.priority]?.badge || PRIORITY.medium.badge;
+  const summary = sanitizeHTML(m.summary || '');
+  const thumbs = attachmentThumbs(m, 3);
   return `
     <a href="#/meetings/${encodeURIComponent(m.id)}" class="card p-4 flex flex-col gap-3 hover:shadow-cardlg transition-all group relative overflow-hidden">
       <div class="absolute left-0 top-0 bottom-0 w-1 ${PRIORITY[m.priority]?.bar || 'bg-secondary'}"></div>
@@ -62,6 +89,8 @@ export function meetingGridCard(m) {
           ${icon('event', 'text-[15px]')}<span>${escapeHtml(fmtDateTime(m.date, m.time))}</span>
         </div>
       </div>
+      ${summary ? `<div class="markdown-body text-[13px] leading-relaxed text-on-surface-variant pl-2">${summary}</div>` : ''}
+      ${thumbs ? `<div class="flex gap-2 pl-2">${thumbs}</div>` : ''}
       <div class="pt-3 border-t border-surface-variant flex items-center justify-between pl-2">
         ${avatarStack(m.participants, 8, 3)}
         <span class="text-primary text-[13px] font-medium">View Details ${icon('chevron_right', 'text-[16px]')}</span>

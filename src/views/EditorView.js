@@ -7,7 +7,8 @@ import { topBarHTML, backButton } from '../components/shared.js';
 import {
   escapeHtml, uid, todayStr, fileToDataURL, sanitizeHTML, formatBytes, isOnline, PRIORITY,
 } from '../lib/utils.js';
-import { driveThumb } from '../lib/config.js';
+import { driveFull } from '../lib/config.js';
+import { attachmentSrc } from '../components/items.js';
 import { navigateTo } from '../router.js';
 
 const DRAFT_KEY = 'ms.draft.v1';
@@ -77,7 +78,8 @@ export default {
               <label class="text-[11px] font-semibold uppercase tracking-wider text-on-surface-variant">Participants</label>
               <div class="relative">
                 ${icon('search', 'absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]')}
-                <input data-participant class="input pl-9 py-2 text-[13px]" placeholder="Add names or emails…" autocomplete="off" />
+                <input data-participant class="input pl-9 py-2 text-[13px]" placeholder="Choose or type names…" autocomplete="off" />
+                <div data-part-suggest class="hidden absolute left-0 right-0 top-full z-20 mt-1 rounded-xl bg-surface-container-high shadow-card border border-outline-variant/40 py-1 overflow-auto max-h-52"></div>
               </div>
               <div data-participants class="flex flex-wrap gap-1.5 min-h-[28px]"></div>
               <div class="grid grid-cols-2 gap-2">
@@ -152,6 +154,7 @@ export default {
     const timeInput = root.querySelector('[data-time]');
     const partInput = root.querySelector('[data-participant]');
     const partBox = root.querySelector('[data-participants]');
+    const suggestBox = root.querySelector('[data-part-suggest]');
     const attachBox = root.querySelector('[data-attachments]');
     const fileInput = root.querySelector('[data-file]');
 
@@ -175,9 +178,10 @@ export default {
 
     function renderAttachments() {
       attachBox.innerHTML = state.attachments.map((a, i) => {
-        const src = a.preview || (a.fileId ? driveThumb(a.fileId, 240) : '');
+        const src = attachmentSrc(a, 240);
+        const fb = a.fileId ? driveFull(a.fileId) : '';
         const body = src
-          ? `<img src="${escapeHtml(src)}" alt="${escapeHtml(a.name || 'attachment')}" class="w-full h-full object-cover" loading="lazy" decoding="async" />`
+          ? `<img src="${escapeHtml(src)}" alt="${escapeHtml(a.name || 'attachment')}" class="w-full h-full object-cover" loading="lazy" decoding="async" ${fb ? `onerror="this.onerror=null;this.src='${escapeHtml(fb)}'"` : ''} />`
           : `<div class="w-full h-full flex flex-col items-center justify-center gap-1 bg-surface-container-highest">${icon('broken_image', 'text-[26px] text-on-surface-variant')}<span class="px-1 text-center text-[9px] text-outline leading-tight">image lost<br>re-add</span></div>`;
         return `
         <div class="relative w-24 h-24 rounded-xl border border-outline-variant overflow-hidden group shrink-0">
@@ -220,7 +224,53 @@ export default {
     });
 
     /* participants */
+    const contacts = () => store.get().contacts || [];
+
+    function renderSuggest(q) {
+      const query = (q || '').trim().toLowerCase();
+      const list = contacts()
+        .filter((c) => !query || (c.name + ' ' + (c.email || '')).toLowerCase().includes(query))
+        .filter((c) => !state.participants.some((p) => p.name === c.name))
+        .slice(0, 8);
+      if (!list.length) { suggestBox.classList.add('hidden'); return; }
+      suggestBox.innerHTML = list.map((c) => `
+        <button type="button" data-pick="${escapeHtml(c.id)}" class="w-full flex items-center gap-2.5 px-3 py-2 text-left text-[13px] hover:bg-surface-variant transition-colors">
+          ${icon('person', 'text-[16px] text-outline shrink-0')}
+          <span class="flex-1 min-w-0">
+            <span class="block truncate font-medium text-on-surface">${escapeHtml(c.name)}</span>
+            ${c.email ? `<span class="block truncate text-[11px] text-outline">${escapeHtml(c.email)}</span>` : ''}
+          </span>
+          ${icon('add', 'text-[16px] text-primary shrink-0')}
+        </button>`).join('');
+      suggestBox.classList.remove('hidden');
+    }
+
+    partInput.addEventListener('input', () => renderSuggest(partInput.value));
+    partInput.addEventListener('focus', () => {
+      if (!contacts().length) {
+        suggestBox.innerHTML = `<div class="px-3 py-2 text-[12px] text-outline">No saved contacts yet — add some in Settings → Contacts, or type a name and press Enter.</div>`;
+        suggestBox.classList.remove('hidden');
+        return;
+      }
+      renderSuggest(partInput.value);
+    });
+    suggestBox.addEventListener('mousedown', (e) => { e.preventDefault(); });
+    suggestBox.addEventListener('touchstart', (e) => { e.preventDefault(); }, { passive: false });
+    suggestBox.addEventListener('click', (e) => {
+      const pick = e.target.closest('[data-pick]');
+      if (!pick) return;
+      const c = contacts().find((x) => x.id === pick.dataset.pick);
+      if (c && !state.participants.some((p) => p.name === c.name)) {
+        state.participants.push({ id: c.id, name: c.name, email: c.email || '', avatar: c.avatar || '' });
+        renderParticipants();
+        saveDraft();
+      }
+      partInput.value = '';
+      suggestBox.classList.add('hidden');
+      partInput.focus();
+    });
     partInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { suggestBox.classList.add('hidden'); return; }
       if (e.key === 'Enter' || e.key === ',') {
         e.preventDefault();
         commitParticipant();

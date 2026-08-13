@@ -4,7 +4,8 @@ import { icon, priorityBadge, avatarStack, emptyState } from '../lib/ui.js';
 import { store } from '../lib/store.js';
 import { topBarHTML, backButton, bottomNavHTML } from '../components/shared.js';
 import { escapeHtml, sanitizeHTML, fmtDate, fmtTime, PRIORITY } from '../lib/utils.js';
-import { driveThumb, driveFull } from '../lib/config.js';
+import { driveFull } from '../lib/config.js';
+import { attachmentSrc } from '../components/items.js';
 import { refresh } from '../router.js';
 
 export default {
@@ -25,10 +26,11 @@ export default {
     const attachments = m.attachments || [];
 
     const attachmentCards = attachments.map((a) => {
-      const src = a.fileId ? driveThumb(a.fileId, 480) : (a.preview && a.preview.startsWith('data:') ? a.preview : '');
+      const src = attachmentSrc(a, 480);
       const href = a.fileId ? driveFull(a.fileId) : (src || '#');
+      const fb = a.fileId ? driveFull(a.fileId) : '';
       const body = src
-        ? `<img src="${escapeHtml(src)}" alt="${escapeHtml(a.name || 'attachment')}" class="w-full h-full object-cover" loading="lazy" decoding="async" />`
+        ? `<img src="${escapeHtml(src)}" alt="${escapeHtml(a.name || 'attachment')}" class="w-full h-full object-cover" loading="lazy" decoding="async" ${fb ? `onerror="this.onerror=null;this.src='${escapeHtml(fb)}'"` : ''} />`
         : `<div class="w-full h-full flex flex-col items-center justify-center gap-1 bg-surface-container-highest">${icon('broken_image', 'text-[26px] text-on-surface-variant')}<span class="px-1 text-center text-[9px] text-outline leading-tight">image lost<br>re-add</span></div>`;
       return `
         <a href="${escapeHtml(href)}" target="_blank" rel="noopener" class="relative w-28 h-28 rounded-xl border border-outline-variant overflow-hidden shrink-0 group" title="${escapeHtml(a.name || '')}">

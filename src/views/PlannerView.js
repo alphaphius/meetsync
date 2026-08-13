@@ -4,7 +4,8 @@ import { icon, toast, emptyState } from '../lib/ui.js';
 import { store } from '../lib/store.js';
 import { topBarHTML, bottomNavHTML } from '../components/shared.js';
 import { avatarStack } from '../lib/ui.js';
-import { escapeHtml, todayStr, PRIORITY, fmtTime } from '../lib/utils.js';
+import { escapeHtml, sanitizeHTML, todayStr, PRIORITY, fmtTime } from '../lib/utils.js';
+import { attachmentThumbs } from '../components/items.js';
 import { navigateTo } from '../router.js';
 
 const MONTHS_TH = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -120,7 +121,10 @@ export default {
         eventsEl.innerHTML = emptyState({ icon: 'event_available', title: 'No meetings', message: 'Nothing scheduled for this day yet.', action: '<a href="#/meetings/new" class="btn btn-primary">Plan a meeting</a>' });
         return;
       }
-      eventsEl.innerHTML = list.map((m) => `
+      eventsEl.innerHTML = list.map((m) => {
+        const summary = sanitizeHTML(m.summary || '');
+        const thumbs = attachmentThumbs(m, 3, 'w-12 h-12');
+        return `
         <a href="#/meetings/${encodeURIComponent(m.id)}" class="card p-4 flex overflow-hidden group hover:shadow-cardlg transition-all cursor-pointer">
           <div class="w-1.5 ${PRIORITY[m.priority]?.bar || 'bg-secondary'} rounded-l-xl shrink-0"></div>
           <div class="flex-1 min-w-0 pl-3">
@@ -129,12 +133,15 @@ export default {
               <span class="text-[12px] text-on-surface-variant shrink-0">${escapeHtml(fmtTime(m.time) || '')}</span>
             </div>
             <h4 class="text-[14px] font-semibold text-on-surface mt-1.5 leading-snug">${escapeHtml(m.title || 'Untitled meeting')}</h4>
-            <div class="flex items-center justify-between mt-2">
+            ${summary ? `<div class="markdown-body text-[12px] leading-relaxed text-on-surface-variant mt-1 mb-2">${summary}</div>` : ''}
+            ${thumbs ? `<div class="flex gap-2 mb-2">${thumbs}</div>` : ''}
+            <div class="flex items-center justify-between mt-1.5">
               ${avatarStack(m.participants, 6, 3)}
               <span class="text-primary text-[13px] font-medium group-hover:underline">View ${icon('chevron_right', 'text-[15px]')}</span>
             </div>
           </div>
-        </a>`).join('');
+        </a>`;
+      }).join('');
     }
 
     calendar.addEventListener('click', (e) => {
