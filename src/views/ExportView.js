@@ -6,7 +6,7 @@ import { queue } from '../lib/syncQueue.js';
 import { api } from '../lib/api.js';
 import { topBarHTML, bottomNavHTML } from '../components/shared.js';
 import { escapeHtml, sanitizeHTML, uid, nowIso, fmtDateTime, initials, PRIORITY, timeAgo } from '../lib/utils.js';
-import { driveFull } from '../lib/config.js';
+import { driveThumb } from '../lib/config.js';
 
 export default {
   id: 'export',
@@ -229,7 +229,7 @@ function buildReport(meetings, sec) {
       ${sec.files && (m.attachments || []).length ? `
       <div style="margin-top:14px;">
         <div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:#767683;margin-bottom:8px;">Attachments (${m.attachments.length})</div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;">${m.attachments.slice(0, 9).map((a) => `<img src="${esc(a.fileId ? driveFull(a.fileId) : '')}" style="width:84px;height:84px;object-fit:cover;border-radius:8px;border:1px solid #e4e1ea;" />`).join('')}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">${m.attachments.slice(0, 9).map((a) => `<img src="${esc(a.fileId ? driveThumb(a.fileId, 160) : '')}" style="width:84px;height:84px;object-fit:cover;border-radius:8px;border:1px solid #e4e1ea;" />`).join('')}</div>
       </div>` : ''}
     </div>`;
   wrap.innerHTML = `

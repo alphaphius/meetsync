@@ -92,7 +92,7 @@ function ensureAll() {
   var folder = getOrCreateFolder();
   try { folder.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW); } catch (e) {}
   ensureConfig(FOLDER_ID_KEY, folder.getId());
-  ensureConfig(PIN_KEY, DEFAULT_PIN);
+  ensureConfig(PIN_KEY, 'P:' + DEFAULT_PIN);
 }
 
 function ensureSheet(name, headers) {
@@ -204,6 +204,14 @@ function upsertRow(sheet, key, value, data) {
 }
 
 /* ---------- Config / Settings ---------- */
+// PIN is stored prefixed ("P:") because Sheets coerces "0000" to number 0.
+function getPin() {
+  var raw = getConfig(PIN_KEY);
+  if (raw === null || raw === undefined) return DEFAULT_PIN;
+  var s = String(raw);
+  return s.indexOf('P:') === 0 ? s.slice(2) : s;
+}
+
 function getConfig(key) {
   var sh = SS().getSheetByName(CONFIG_SHEET);
   if (!sh) return null;
@@ -226,7 +234,7 @@ function writeConfig(key, value) {
 function readSettings() {
   var out = {};
   readAll(SETTINGS()).forEach(function (r) { if (r.key) out[r.key] = r.value; });
-  out.pin = getConfig(PIN_KEY);
+  out.pin = getPin();
   out.attachmentsFolderId = getConfig(FOLDER_ID_KEY);
   return out;
 }
@@ -236,11 +244,12 @@ function saveSettings(body) {
   var map = {};
   readAll(SETTINGS()).forEach(function (r) { if (r.key) map[r.key] = r.value; });
   Object.keys(data).forEach(function (k) {
-    if (k === 'pin') return;
+    if (k === 'pin' || k === 'deletePin') return;
     map[k] = data[k];
   });
-  if (data.pin !== undefined && String(data.pin).length >= 4) {
-    writeConfig(PIN_KEY, String(data.pin));
+  var newPin = data.pin !== undefined ? data.pin : data.deletePin;
+  if (newPin !== undefined && String(newPin).length >= 4) {
+    writeConfig(PIN_KEY, 'P:' + String(newPin));
   }
   var sh = SETTINGS();
   var keys = Object.keys(map);
@@ -315,7 +324,7 @@ function saveProject(body) {
 }
 
 function deleteProject(body) {
-  var pin = getConfig(PIN_KEY);
+  var pin = getPin();
   if (String(body.pin) !== String(pin)) return { ok: false, error: 'Invalid PIN' };
   var id = body.id;
   var row = findRowBy(PROJECTS(), 'id', id);
@@ -361,7 +370,7 @@ function saveMeeting(body) {
 }
 
 function deleteMeeting(body) {
-  var pin = getConfig(PIN_KEY);
+  var pin = getPin();
   if (String(body.pin) !== String(pin)) return { ok: false, error: 'Invalid PIN' };
   var id = body.id;
   var row = findRowBy(MEETINGS(), 'id', id);
