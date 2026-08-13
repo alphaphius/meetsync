@@ -1,0 +1,167 @@
+/* ============================================================
+   MeetSync design tokens — Material 3 (light + dark + accents)
+   Colors stored as comma-separated RGB triplets so Tailwind
+   can apply alpha modifiers via rgb(var(--x) / <alpha-value>).
+   ============================================================ */
+
+:root {
+  /* Primary (accent) — navy/indigo */
+  --primary: 0 6 102;
+  --on-primary: 255 255 255;
+  --primary-container: 26 35 126;
+  --on-primary-container: 224 224 255;
+  --primary-fixed: 224 224 255;
+  --on-primary-fixed: 0 7 103;
+  --primary-fixed-dim: 189 194 255;
+  --on-primary-fixed-variant: 52 61 150;
+  --inverse-primary: 189 194 255;
+
+  /* Secondary — slate blue */
+  --secondary: 80 95 118;
+  --on-secondary: 255 255 255;
+  --secondary-container: 208 225 251;
+  --on-secondary-container: 84 100 122;
+  --secondary-fixed: 211 228 254;
+  --on-secondary-fixed: 11 28 48;
+  --secondary-fixed-dim: 183 200 225;
+  --on-secondary-fixed-variant: 56 72 93;
+
+  /* Tertiary — warm amber */
+  --tertiary: 56 11 0;
+  --on-tertiary: 255 255 255;
+  --tertiary-container: 92 24 0;
+  --on-tertiary-container: 255 219 208;
+  --tertiary-fixed: 255 219 208;
+  --on-tertiary-fixed: 57 12 0;
+  --tertiary-fixed-dim: 255 181 157;
+  --on-tertiary-fixed-variant: 123 46 18;
+
+  /* Error */
+  --error: 186 26 26;
+  --on-error: 255 255 255;
+  --error-container: 255 218 214;
+  --on-error-container: 147 0 10;
+
+  /* Surfaces (light) */
+  --background: 251 248 255;
+  --on-background: 27 27 33;
+  --surface: 251 248 255;
+  --on-surface: 27 27 33;
+  --surface-variant: 228 225 234;
+  --on-surface-variant: 69 70 82;
+  --surface-container-lowest: 255 255 255;
+  --surface-container-low: 245 242 251;
+  --surface-container: 239 236 245;
+  --surface-container-high: 234 231 239;
+  --surface-container-highest: 228 225 234;
+  --surface-bright: 251 248 255;
+  --surface-dim: 219 217 225;
+  --surface-tint: 76 86 175;
+
+  /* Others */
+  --outline: 118 118 131;
+  --outline-variant: 198 197 212;
+  --inverse-surface: 48 48 54;
+  --inverse-on-surface: 242 239 248;
+
+  --radius: 0.75rem;
+  --elev-1: 0 1px 2px rgba(0,0,0,.05), 0 2px 8px -2px rgba(0,0,0,.05);
+  --elev-2: 0 2px 4px rgba(0,0,0,.05), 0 12px 32px -8px rgba(0,0,0,.12);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.dark {
+  --primary: 189 194 255;
+  --on-primary: 26 32 86;
+  --primary-container: 57 66 150;
+  --on-primary-container: 224 224 255;
+  --primary-fixed: 224 224 255;
+  --on-primary-fixed: 0 7 103;
+  --primary-fixed-dim: 189 194 255;
+  --on-primary-fixed-variant: 52 61 150;
+  --inverse-primary: 0 6 102;
+
+  --secondary: 183 200 225;
+  --on-secondary: 33 48 65;
+  --secondary-container: 61 74 92;
+  --on-secondary-container: 211 228 254;
+  --secondary-fixed: 211 228 254;
+  --on-secondary-fixed: 11 28 48;
+  --secondary-fixed-dim: 183 200 225;
+  --on-secondary-fixed-variant: 56 72 93;
+
+  --tertiary: 255 181 157;
+  --on-tertiary: 89 33 13;
+  --tertiary-container: 110 53 31;
+  --on-tertiary-container: 255 219 208;
+  --tertiary-fixed: 255 219 208;
+  --on-tertiary-fixed: 57 12 0;
+  --tertiary-fixed-dim: 255 181 157;
+  --on-tertiary-fixed-variant: 123 46 18;
+
+  --error: 255 180 171;
+  --on-error: 105 0 5;
+  --error-container: 147 0 10;
+  --on-error-container: 255 218 214;
+
+  --background: 20 22 30;
+  --on-background: 229 225 236;
+  --surface: 20 22 30;
+  --on-surface: 229 225 236;
+  --surface-variant: 69 70 82;
+  --on-surface-variant: 201 197 209;
+  --surface-container-lowest: 15 17 24;
+  --surface-container-low: 28 30 39;
+  --surface-container: 32 34 43;
+  --surface-container-high: 43 45 55;
+  --surface-container-highest: 54 56 66;
+  --surface-bright: 20 22 30;
+  --surface-dim: 26 28 36;
+  --surface-tint: 189 194 255;
+
+  --outline: 147 144 156;
+  --outline-variant: 69 70 82;
+  --inverse-surface: 229 225 236;
+  --inverse-on-surface: 48 48 54;
+}
+
+/* Accent theme switcher — secondary slate */
+[data-accent="secondary"] {
+  --primary: 80 95 118;
+  --on-primary: 255 255 255;
+  --primary-container: 208 225 251;
+  --on-primary-container: 38 57 78;
+  --primary-fixed: 211 228 254;
+  --on-primary-fixed: 11 28 48;
+  --primary-fixed-dim: 183 200 225;
+  --on-primary-fixed-variant: 56 72 93;
+  --inverse-primary: 183 200 225;
+}
+.dark[data-accent="secondary"] {
+  --primary: 183 200 225;
+  --on-primary: 33 48 65;
+  --primary-container: 61 74 92;
+  --on-primary-container: 211 228 254;
+  --inverse-primary: 80 95 118;
+}
+
+/* Accent theme switcher — tertiary amber */
+[data-accent="tertiary"] {
+  --primary: 92 24 0;
+  --on-primary: 255 255 255;
+  --primary-container: 255 219 208;
+  --on-primary-container: 57 12 0;
+  --primary-fixed: 255 219 208;
+  --on-primary-fixed: 57 12 0;
+  --primary-fixed-dim: 255 181 157;
+  --on-primary-fixed-variant: 123 46 18;
+  --inverse-primary: 255 181 157;
+}
+.dark[data-accent="tertiary"] {
+  --primary: 255 181 157;
+  --on-primary: 89 33 13;
+  --primary-container: 110 53 31;
+  --on-primary-container: 255 219 208;
+  --inverse-primary: 92 24 0;
+}

@@ -1,0 +1,2768 @@
+<!-- Design System -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>MeetSync - Dashboard</title>
+        <script
+            src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#eae7ef",
+                    "surface": "#fbf8ff",
+                    "secondary": "#505f76",
+                    "tertiary-fixed": "#ffdbd0",
+                    "on-secondary-container": "#54647a",
+                    "on-secondary-fixed": "#0b1c30",
+                    "tertiary-container": "#5c1800",
+                    "surface-container": "#efecf5",
+                    "inverse-primary": "#bdc2ff",
+                    "outline-variant": "#c6c5d4",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#1b1b21",
+                    "inverse-surface": "#303036",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e4e1ea",
+                    "primary": "#000666",
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "on-surface-variant": "#454652",
+                    "primary-container": "#1a237e",
+                    "primary-fixed": "#e0e0ff",
+                    "inverse-on-surface": "#f2eff8",
+                    "outline": "#767683",
+                    "on-primary-container": "#8690ee",
+                    "secondary-container": "#d0e1fb",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "on-primary-fixed-variant": "#343d96",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f5f2fb",
+                    "secondary-fixed": "#d3e4fe",
+                    "on-tertiary-fixed-variant": "#7b2e12",
+                    "on-tertiary-fixed": "#390c00",
+                    "surface-container-highest": "#e4e1ea",
+                    "surface-tint": "#4c56af",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#000767",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#fbf8ff",
+                    "on-background": "#1b1b21",
+                    "tertiary": "#380b00",
+                    "surface-dim": "#dbd9e1",
+                    "on-tertiary-container": "#e17c5a",
+                    "primary-fixed-dim": "#bdc2ff",
+                    "background": "#fbf8ff",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "xl": "48px",
+                    "gutter": "20px",
+                    "sm": "16px",
+                    "container-max": "1200px",
+                    "md": "24px",
+                    "xs": "8px",
+                    "lg": "32px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-md-mobile": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["11px", {"lineHeight": "14px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+        <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+    </head>
+    <body class="bg-background text-on-background min-h-screen pb-[80px]">
+        <!-- pb-[80px] for BottomNavBar -->
+        <!-- TopAppBar -->
+        <header
+            class="bg-surface shadow-sm docked full-width top-0 flex justify-between items-center w-full px-4 py-3 sticky z-50">
+            <div class="flex items-center gap-sm">
+                <img class="w-8 h-8 rounded-full object-cover"
+                    data-alt="A professional headshot of a corporate executive against a clean white background. High resolution, bright lighting, representing a user profile avatar."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmWJaJJvbJDIg1ZqndcJkGTazP4hyibpcJWQqKf7sS-Rf8g5RiEMospA-FnIRtiaYSPVQCK93UlJ0HhLSpRLbOAyJCVLiY7EBNNi6E4oJGqwct25s7ukVpSXW_Hq3ofuADd5zD5WIdHTqwRhAUtrbURg0DvD9fFqK8B6rRvrFwMFN_JQw9qXxuXqYLWsHYkYtiHVLcGvAwjkvGRFAZINFzl2qgXQguBdRh3FsXotMGKoqvfRoXP9Qe" />
+                <h1
+                    class="font-headline-md-mobile text-headline-md-mobile font-bold text-primary">MeetSync</h1>
+            </div>
+            <button
+                class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant transition-transform active:scale-95 duration-150 text-primary">
+                <span class="material-symbols-outlined"
+                    data-icon="notifications">notifications</span>
+            </button>
+        </header>
+        <main
+            class="max-w-[1200px] mx-auto w-full px-4 md:px-6 py-6 md:grid md:grid-cols-12 md:gap-6">
+            <div class="md:col-span-12 mb-lg">
+                <!-- Search Bar -->
+                <div class="relative w-full">
+                    <span
+                        class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline"
+                        data-icon="search">search</span>
+                    <input
+                        class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant rounded-xl font-body-md text-body-md text-on-surface focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 focus:outline-none transition-shadow shadow-[0_4px_6px_-1px_rgba(0,0,0,0.04)]"
+                        placeholder="Search meetings, projects, or action items..."
+                        type="text" />
+                </div>
+            </div>
+            <!-- Active Projects Section (Horizontal Scroll) -->
+            <section class="md:col-span-12 mb-lg overflow-hidden">
+                <h2
+                    class="font-headline-sm text-headline-sm text-on-surface mb-sm">Active
+                    Projects</h2>
+                <div
+                    class="flex overflow-x-auto gap-4 pb-4 hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
+                    <!-- Project Card 1 -->
+                    <div
+                        class="min-w-[280px] bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_6px_-1px_rgba(0,0,0,0.04)] border border-outline-variant/30 flex-shrink-0">
+                        <div class="flex justify-between items-start mb-sm">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+                                <span class="material-symbols-outlined"
+                                    data-icon="rocket_launch">rocket_launch</span>
+                            </div>
+                            <span
+                                class="font-label-sm text-label-sm px-2 py-1 bg-surface-container-high rounded text-on-surface-variant">Q3
+                                Planning</span>
+                        </div>
+                        <h3
+                            class="font-headline-sm text-headline-sm text-on-surface mb-xs">Project
+                            Alpha</h3>
+                        <p
+                            class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-md">Strategic
+                            overhaul of main consumer app interface and backend
+                            logic.</p>
+                        <div
+                            class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+                            <div
+                                class="bg-primary w-3/4 h-full rounded-full"></div>
+                        </div>
+                    </div>
+                    <!-- Project Card 2 -->
+                    <div
+                        class="min-w-[280px] bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_6px_-1px_rgba(0,0,0,0.04)] border border-outline-variant/30 flex-shrink-0">
+                        <div class="flex justify-between items-start mb-sm">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+                                <span class="material-symbols-outlined"
+                                    data-icon="monitoring">monitoring</span>
+                            </div>
+                            <span
+                                class="font-label-sm text-label-sm px-2 py-1 bg-surface-container-high rounded text-on-surface-variant">Marketing</span>
+                        </div>
+                        <h3
+                            class="font-headline-sm text-headline-sm text-on-surface mb-xs">Campaign
+                            Zeta</h3>
+                        <p
+                            class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-md">Q4
+                            advertising push across major social platforms and
+                            targeted email lists.</p>
+                        <div
+                            class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+                            <div
+                                class="bg-secondary w-1/3 h-full rounded-full"></div>
+                        </div>
+                    </div>
+                    <!-- Project Card 3 -->
+                    <div
+                        class="min-w-[280px] bg-surface-container-lowest rounded-xl p-md shadow-[0_4px_6px_-1px_rgba(0,0,0,0.04)] border border-outline-variant/30 flex-shrink-0">
+                        <div class="flex justify-between items-start mb-sm">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+                                <span class="material-symbols-outlined"
+                                    data-icon="database">database</span>
+                            </div>
+                            <span
+                                class="font-label-sm text-label-sm px-2 py-1 bg-surface-container-high rounded text-on-surface-variant">Infrastructure</span>
+                        </div>
+                        <h3
+                            class="font-headline-sm text-headline-sm text-on-surface mb-xs">Server
+                            Migration</h3>
+                        <p
+                            class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-md">Moving
+                            legacy databases to new cloud provider for increased
+                            efficiency.</p>
+                        <div
+                            class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+                            <div
+                                class="bg-tertiary w-[90%] h-full rounded-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Recent Meetings Section -->
+            <section class="md:col-span-12">
+                <div class="flex justify-between items-end mb-sm">
+                    <h2
+                        class="font-headline-sm text-headline-sm text-on-surface">Recent
+                        Meetings</h2>
+                    <button
+                        class="font-label-md text-label-md text-primary hover:underline">View
+                        All</button>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <!-- Meeting Card 1 - High Priority -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-[0_4px_6px_-1px_rgba(0,0,0,0.04)] border border-outline-variant/30 overflow-hidden flex relative p-md pl-6">
+                        <div
+                            class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
+                        <!-- Priority Strip -->
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-xs">
+                                <span
+                                    class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-error-container text-on-error-container border border-error/20">High
+                                    Priority</span>
+                                <span
+                                    class="font-body-md text-body-md text-on-surface-variant">Oct
+                                    24, 10:00 AM</span>
+                            </div>
+                            <h3
+                                class="font-headline-sm text-headline-sm text-on-surface mb-xs">Project
+                                Alpha Stakeholder Review</h3>
+                            <p
+                                class="font-body-md text-body-md text-on-surface-variant mb-sm">Project
+                                Alpha</p>
+                            <div class="flex items-center gap-xs">
+                                <div class="flex -space-x-2">
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-30"
+                                        data-alt="Small circular profile picture of a woman with short dark hair in a professional setting, well lit."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJBHZptNMWtMxm2xBRKtcrgHwjwDt0cjNLlDTxkCNjxtUO_Y_FdMUaKd0NwBItOZa7wwip3IO-uWC0W6U4mJVmF4Nv4AUlq922BrjRMzYvKBnYAqASuTmNc1hHjt_rr9jq8hGCnJvZuTDF67nNR3QHMJbHNbBQKY3PgJL27HVba-0hUftITp0nKFtlcUshquUMG_mqf-uxmR-mG4ujaBR7b-Ue01s0mcCkWZ39KIm1-WRSJjDzLtZx" />
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-20"
+                                        data-alt="Small circular profile picture of a man with glasses and a beard, neutral expression, office background."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuClUiStjrP2TP2_GP2kXxCoBq4c9bq67Ji2858n8mXHA9sP1PVMUQEfUA0ytnwnx8XEtja8qxVRyBR9sVLg4WP0m6NSPjye1p4t-1RhH0ah_8WQdAKlIiedPp1PNqv2UYd_rXQyXbMcs5YyawIdAJDNTINAsPbZdDEMElRx8uK1k30uUWG5zpw-WIFEX10sKVIWHSCr80jBJKTlmu0U5iAgpQo88lrUkepNYrRlh80y5erwpb4W3YVn" />
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-10"
+                                        data-alt="Small circular profile picture of a woman smiling, wearing a blue blouse, studio lighting."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvIcSDex8O9FVexS9QabpN0KKI2BfQGEaBwTuZY35td55--CRWgRcnPuavLraUIS2qfnGlGmZmUC6kYd6OZmEjy7BfPJmuRuIAq6cWLXbTutXHdfhsNUDOsaNQuORd6hOVN0gZ2uAZYvRGtp613D1t21ea5rjsxjQAUUC6OlKJCbo1WAJQgT4xfyUIYnfLznACQRI-97SSW6TEkP7tLi2ExDYonv5bNFPBXVhTOftkoRDKTSF0Gc6x" />
+                                </div>
+                                <span
+                                    class="font-body-md text-body-md text-outline ml-2">+2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Meeting Card 2 - Medium Priority -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-[0_4px_6px_-1px_rgba(0,0,0,0.04)] border border-outline-variant/30 overflow-hidden flex relative p-md pl-6">
+                        <div
+                            class="absolute left-0 top-0 bottom-0 w-1.5 bg-tertiary-container"></div>
+                        <!-- Priority Strip -->
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-xs">
+                                <span
+                                    class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed border border-tertiary/20">Medium
+                                    Priority</span>
+                                <span
+                                    class="font-body-md text-body-md text-on-surface-variant">Oct
+                                    23, 2:30 PM</span>
+                            </div>
+                            <h3
+                                class="font-headline-sm text-headline-sm text-on-surface mb-xs">Marketing
+                                Weekly Sync</h3>
+                            <p
+                                class="font-body-md text-body-md text-on-surface-variant mb-sm">Campaign
+                                Zeta</p>
+                            <div class="flex items-center gap-xs">
+                                <div class="flex -space-x-2">
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-20"
+                                        data-alt="Small circular profile picture of a young professional woman in a brightly lit modern office."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCGMj7yjb0f5vAYAbM_-lQzvTFfkFGpZk3kcVrXcSuN7pGBmJmwr50qY1tO-rWKG02dZiVSJVWWyTzz2HtcytV5xQ3DLUm27OrhrpP0w_cCp3_Z2DhZFbrBn7iB_hUzN4ZNEKTgRUMSO6rBPQEV2T8Z_0Yurg8HLJ-hRbLXGZ7orXTWuAXe-l1Qzj4hk9-TGfeQOGEcJmS8HbtJX7shWoxtT8zihzgvvZTv-KJOatDELSrmR9a5kAX" />
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-10"
+                                        data-alt="Small circular profile picture of a man wearing a casual shirt, outdoor background softly blurred."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8gLt2o6kvJd8Ndb39lcPGNfUWWN5R427Z8ZL2EPtp9gnL_mLxBl2LLxlV6CihQfchf2F3dMyRyhfqJagnBdOyEvdicGgzQXNlwF2E7Inu35ukrcj0XMO-WCr6LpqTt-4zgh_WB_ApG8awn4knuJLSQ2XnKIAt7FsUmmNsVdWPqWgye7xu80XvFcNL6bFz9mZUvV41LTn0PxtpuCtSbMTbkrHAWJERYPo8l_KKpTIFVtH_W-pKwCkB" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Meeting Card 3 - Low Priority -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-[0_4px_6px_-1px_rgba(0,0,0,0.04)] border border-outline-variant/30 overflow-hidden flex relative p-md pl-6">
+                        <div
+                            class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+                        <!-- Priority Strip -->
+                        <div class="flex-1">
+                            <div class="flex justify-between items-start mb-xs">
+                                <span
+                                    class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed border border-secondary/20">Low
+                                    Priority</span>
+                                <span
+                                    class="font-body-md text-body-md text-on-surface-variant">Oct
+                                    22, 11:15 AM</span>
+                            </div>
+                            <h3
+                                class="font-headline-sm text-headline-sm text-on-surface mb-xs">Dev
+                                Team Standup</h3>
+                            <p
+                                class="font-body-md text-body-md text-on-surface-variant mb-sm">Internal
+                                Ops</p>
+                            <div class="flex items-center gap-xs">
+                                <div class="flex -space-x-2">
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-20"
+                                        data-alt="Small circular profile picture of a male software developer wearing headphones, dim office lighting."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgvD3cnu6h--qb6W1q-daHKO4yzwv4o_PpqekdFCMo5eoIq3lztmzv_sdrxqlALk9esrrlo-SUbTrj-ExjQywBKLl0UnOOsYzBJtUsuFXJTvDGHAfsqt_ihtOiwkd5oAJKntEomloC-iqvMY8GZDW-xK7ep7caL6sxYbS865sIi_W0n5g7ESr_q20JSImcRyfWcj6lnZfa2aPUT5_aGXr50JHkb2C8qSIwk0SVt5P19Ts510HpJdte" />
+                                    <div
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-container-high flex items-center justify-center font-label-sm text-on-surface-variant z-10">TS</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Floating Action Button -->
+        <button
+            class="fixed right-6 bottom-[100px] w-14 h-14 bg-primary-container text-on-primary rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.15)] flex items-center justify-center hover:bg-primary transition-all duration-200 active:scale-95 z-40 md:hidden">
+            <span class="material-symbols-outlined" data-icon="add"
+                style="font-size: 28px;">add</span>
+        </button>
+        <button
+            class="fixed right-8 bottom-8 w-14 h-14 bg-primary-container text-on-primary rounded-2xl shadow-[0_8px_16px_rgba(0,0,0,0.15)] items-center justify-center hover:bg-primary transition-all duration-200 active:scale-95 z-40 hidden md:flex">
+            <span class="material-symbols-outlined" data-icon="add"
+                style="font-size: 28px;">add</span>
+        </button>
+        <!-- BottomNavBar (Mobile Only based on rules) -->
+        <nav
+            class="md:hidden bg-surface-container-lowest shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.04)] docked full-width bottom-0 rounded-t-xl fixed w-full z-50 flex justify-around items-center px-4 py-2 transition-all duration-200 ease-in-out">
+            <!-- Home (Active) -->
+            <a
+                class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-5 py-1"
+                href="#">
+                <span class="material-symbols-outlined mb-1" data-icon="home"
+                    data-weight="fill"
+                    style="font-variation-settings: 'FILL' 1;">home</span>
+                <span class="font-label-md text-label-md">Home</span>
+            </a>
+            <!-- Planner (Inactive) -->
+            <a
+                class="flex flex-col items-center justify-center text-on-secondary-fixed-variant hover:bg-surface-container-high rounded-full px-5 py-1 transition-colors"
+                href="#">
+                <span class="material-symbols-outlined mb-1"
+                    data-icon="calendar_today">calendar_today</span>
+                <span class="font-label-md text-label-md">Planner</span>
+            </a>
+            <!-- Projects (Inactive) -->
+            <a
+                class="flex flex-col items-center justify-center text-on-secondary-fixed-variant hover:bg-surface-container-high rounded-full px-5 py-1 transition-colors"
+                href="#">
+                <span class="material-symbols-outlined mb-1"
+                    data-icon="folder">folder</span>
+                <span class="font-label-md text-label-md">Projects</span>
+            </a>
+            <!-- Export (Inactive) -->
+            <a
+                class="flex flex-col items-center justify-center text-on-secondary-fixed-variant hover:bg-surface-container-high rounded-full px-5 py-1 transition-colors"
+                href="#">
+                <span class="material-symbols-outlined mb-1"
+                    data-icon="ios_share">ios_share</span>
+                <span class="font-label-md text-label-md">Export</span>
+            </a>
+        </nav>
+    </body></html>
+
+<!-- Home Dashboard -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>MeetSync - New Summary</title>
+        <script
+            src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#eae7ef",
+                        "surface": "#fbf8ff",
+                        "secondary": "#505f76",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-secondary-container": "#54647a",
+                        "on-secondary-fixed": "#0b1c30",
+                        "tertiary-container": "#5c1800",
+                        "surface-container": "#efecf5",
+                        "inverse-primary": "#bdc2ff",
+                        "outline-variant": "#c6c5d4",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1b1b21",
+                        "inverse-surface": "#303036",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e4e1ea",
+                        "primary": "#000666",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "on-surface-variant": "#454652",
+                        "primary-container": "#1a237e",
+                        "primary-fixed": "#e0e0ff",
+                        "inverse-on-surface": "#f2eff8",
+                        "outline": "#767683",
+                        "on-primary-container": "#8690ee",
+                        "secondary-container": "#d0e1fb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-primary-fixed-variant": "#343d96",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f5f2fb",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-tertiary-fixed-variant": "#7b2e12",
+                        "on-tertiary-fixed": "#390c00",
+                        "surface-container-highest": "#e4e1ea",
+                        "surface-tint": "#4c56af",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#000767",
+                        "on-secondary": "#ffffff",
+                        "surface-bright": "#fbf8ff",
+                        "on-background": "#1b1b21",
+                        "tertiary": "#380b00",
+                        "surface-dim": "#dbd9e1",
+                        "on-tertiary-container": "#e17c5a",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "background": "#fbf8ff",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "xl": "48px",
+                        "gutter": "20px",
+                        "sm": "16px",
+                        "container-max": "1200px",
+                        "md": "24px",
+                        "xs": "8px",
+                        "lg": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+        <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 102, 0.04), 0 2px 4px -1px rgba(0, 0, 102, 0.02);
+        }
+    </style>
+    </head>
+    <body
+        class="bg-background text-on-background min-h-screen font-body-lg flex flex-col">
+        <!-- TopAppBar -->
+        <header
+            class="flex justify-between items-center w-full px-4 py-3 sticky top-0 z-50 bg-surface dark:bg-background shadow-sm dark:shadow-none transition-transform active:scale-95 duration-150">
+            <div class="flex items-center gap-sm">
+                <img class="w-8 h-8 rounded-full object-cover"
+                    data-alt="A small, professional circular avatar profile picture of a business executive in a light, corporate setting, suitable for a modern business application interface."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVr37IkoAVP2l6Bi_lRSRHS_AsDp74uwEtfZ7Dowrk6-IjUeJGE7wNQ8UGmpFOAnKWXeoYlXfz72vry1qh3ykCrQYqCX7-pK-p92NGB1-O6397zx8BkUjkLqcClnrqAbJBZPHb6Fuev-hBHouUg-yRN42hKBb8YyY39-FOftaO_3jDp3M73rE8d-ddIr-eT8f40EG0jELwqGIUjxS3Z3W0606eruG_i5HLHXqbTc72AcsICCrPeDFN" />
+                <span
+                    class="font-headline-md-mobile text-headline-md-mobile font-bold text-primary dark:text-inverse-primary hidden md:inline">MeetSync</span>
+                <h1
+                    class="font-headline-sm text-headline-sm md:hidden text-primary">New
+                    Summary</h1>
+            </div>
+            <h1
+                class="font-headline-sm text-headline-sm hidden md:block text-on-surface">New
+                Summary</h1>
+            <div class="flex items-center gap-sm">
+                <button
+                    class="flex items-center gap-xs px-4 py-2 bg-primary-container text-on-primary rounded-lg hover:bg-on-primary-fixed-variant transition-colors">
+                    <span class="material-symbols-outlined"
+                        style="font-size: 20px;">save</span>
+                    <span
+                        class="font-label-md text-label-md hidden md:inline">Save</span>
+                </button>
+                <button
+                    class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full transition-colors flex items-center justify-center">
+                    <span class="material-symbols-outlined"
+                        style="font-size: 24px;">notifications</span>
+                </button>
+            </div>
+        </header>
+        <!-- Main Content Canvas -->
+        <main
+            class="flex-grow w-full max-w-[container-max] mx-auto px-4 md:px-md py-lg grid grid-cols-4 md:grid-cols-12 gap-gutter pb-32">
+            <!-- Editor Left Column (Metadata) -->
+            <div class="col-span-4 md:col-span-4 flex flex-col gap-sm">
+                <div class="glass-panel p-md rounded-xl flex flex-col gap-sm">
+                    <!-- Title Input -->
+                    <div class="flex flex-col gap-xs">
+                        <label
+                            class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Meeting
+                            Title</label>
+                        <input
+                            class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-lg text-body-lg text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all shadow-sm"
+                            placeholder="e.g. Q3 Roadmap Review" type="text" />
+                    </div>
+                    <!-- Project Select -->
+                    <div class="flex flex-col gap-xs">
+                        <label
+                            class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Project</label>
+                        <div class="relative">
+                            <select
+                                class="w-full appearance-none bg-surface-container-lowest border border-outline-variant rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all shadow-sm">
+                                <option value>Select a project...</option>
+                                <option value="p1">Alpha Redesign</option>
+                                <option value="p2">Q4 Marketing
+                                    Campaign</option>
+                                <option value="p3">Infrastructure
+                                    Migration</option>
+                            </select>
+                            <span
+                                class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant pointer-events-none">arrow_drop_down</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Priority -->
+                <div class="glass-panel p-md rounded-xl flex flex-col gap-sm">
+                    <label
+                        class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Priority</label>
+                    <div class="flex bg-surface-container rounded-lg p-1">
+                        <button
+                            class="flex-1 py-2 font-label-md text-label-md rounded-lg transition-colors text-error bg-error-container font-bold shadow-sm">High</button>
+                        <button
+                            class="flex-1 py-2 font-label-md text-label-md rounded-lg transition-colors text-on-surface-variant hover:bg-surface-variant">Medium</button>
+                        <button
+                            class="flex-1 py-2 font-label-md text-label-md rounded-lg transition-colors text-on-surface-variant hover:bg-surface-variant">Low</button>
+                    </div>
+                </div>
+                <!-- Participants -->
+                <div class="glass-panel p-md rounded-xl flex flex-col gap-sm">
+                    <div class="flex justify-between items-center mb-xs">
+                        <label
+                            class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Participants</label>
+                        <div
+                            class="flex items-center gap-2 bg-surface-container rounded-full p-1">
+                            <button
+                                class="px-3 py-1 font-label-sm text-label-sm rounded-full bg-surface-container-lowest shadow text-on-surface font-semibold">Individual</button>
+                            <button
+                                class="px-3 py-1 font-label-sm text-label-sm rounded-full text-on-surface-variant hover:text-on-surface">Group</button>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant"
+                            style="font-size: 20px;">search</span>
+                        <input
+                            class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-10 pr-4 py-2 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all"
+                            placeholder="Add names or emails..." type="text" />
+                    </div>
+                    <!-- Date/Time Inline -->
+                    <div class="flex gap-xs mt-2">
+                        <div class="relative flex-1">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant"
+                                style="font-size: 18px;">calendar_today</span>
+                            <input
+                                class="w-full bg-surface-container border border-outline-variant rounded-lg pl-10 pr-2 py-2 font-body-md text-body-md text-on-surface text-sm focus:outline-none"
+                                type="date" />
+                        </div>
+                        <div class="relative flex-1">
+                            <span
+                                class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant"
+                                style="font-size: 18px;">schedule</span>
+                            <input
+                                class="w-full bg-surface-container border border-outline-variant rounded-lg pl-10 pr-2 py-2 font-body-md text-body-md text-on-surface text-sm focus:outline-none"
+                                type="time" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Editor Right Column (Content) -->
+            <div class="col-span-4 md:col-span-8 flex flex-col gap-lg">
+                <!-- Main Editor Area -->
+                <div
+                    class="glass-panel p-md rounded-xl flex flex-col h-full min-h-[400px]">
+                    <div
+                        class="flex justify-between items-center mb-sm border-b border-surface-variant pb-3">
+                        <label
+                            class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider flex items-center gap-xs">
+                            <span class="material-symbols-outlined"
+                                style="font-size: 18px;">description</span>
+                            Meeting Summary &amp; Details
+                        </label>
+                        <!-- Export Actions -->
+                        <div class="flex items-center gap-xs">
+                            <button
+                                class="text-on-surface-variant hover:text-primary-container hover:bg-surface-variant p-2 rounded-lg transition-colors flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined"
+                                    style="font-size: 20px;">picture_as_pdf</span>
+                                <span
+                                    class="font-label-sm text-label-sm hidden md:inline">PDF</span>
+                            </button>
+                            <button
+                                class="text-on-surface-variant hover:text-primary-container hover:bg-surface-variant p-2 rounded-lg transition-colors flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined"
+                                    style="font-size: 20px;">image</span>
+                                <span
+                                    class="font-label-sm text-label-sm hidden md:inline">IMG</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Rich Text Tools Dummy -->
+                    <div
+                        class="flex items-center gap-2 mb-3 text-on-surface-variant overflow-x-auto pb-2">
+                        <button
+                            class="p-1 hover:bg-surface-variant rounded"><span
+                                class="material-symbols-outlined"
+                                style="font-size: 18px;">format_bold</span></button>
+                        <button
+                            class="p-1 hover:bg-surface-variant rounded"><span
+                                class="material-symbols-outlined"
+                                style="font-size: 18px;">format_italic</span></button>
+                        <button
+                            class="p-1 hover:bg-surface-variant rounded"><span
+                                class="material-symbols-outlined"
+                                style="font-size: 18px;">format_underlined</span></button>
+                        <div class="w-px h-4 bg-outline-variant mx-1"></div>
+                        <button
+                            class="p-1 hover:bg-surface-variant rounded"><span
+                                class="material-symbols-outlined"
+                                style="font-size: 18px;">format_list_bulleted</span></button>
+                        <button
+                            class="p-1 hover:bg-surface-variant rounded"><span
+                                class="material-symbols-outlined"
+                                style="font-size: 18px;">format_list_numbered</span></button>
+                        <div class="w-px h-4 bg-outline-variant mx-1"></div>
+                        <button
+                            class="p-1 hover:bg-surface-variant rounded"><span
+                                class="material-symbols-outlined"
+                                style="font-size: 18px;">link</span></button>
+                    </div>
+                    <textarea
+                        class="w-full flex-grow bg-transparent border-none resize-none font-body-lg text-body-lg text-on-surface focus:outline-none focus:ring-0 p-0 leading-relaxed"
+                        placeholder="Start typing the meeting notes here..."></textarea>
+                </div>
+                <!-- Attachments -->
+                <div class="glass-panel p-md rounded-xl flex flex-col gap-sm">
+                    <div class="flex justify-between items-center">
+                        <label
+                            class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider flex items-center gap-xs">
+                            <span class="material-symbols-outlined"
+                                style="font-size: 18px;">attach_file</span>
+                            Attachments
+                        </label>
+                        <button
+                            class="flex items-center gap-1 px-3 py-1.5 border border-outline-variant text-on-surface rounded-lg hover:bg-surface-variant transition-colors">
+                            <span class="material-symbols-outlined"
+                                style="font-size: 18px;">add_photo_alternate</span>
+                            <span class="font-label-sm text-label-sm">Add
+                                Images</span>
+                        </button>
+                    </div>
+                    <div class="flex gap-4 overflow-x-auto py-2">
+                        <!-- Thumbnail 1 -->
+                        <div
+                            class="relative w-24 h-24 rounded-lg border border-outline-variant overflow-hidden group shrink-0 shadow-sm">
+                            <img class="w-full h-full object-cover"
+                                data-alt="A clean, minimalist whiteboard with colorful sticky notes and a partially drawn architectural diagram, photographed straight on in bright daylight, suitable for a corporate meeting asset."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdYuiNTCrgTUVaFgYz08VLmEA-alQiz05vhBm1POoTSldT_nvNG33dqH8nMoa1ja6aVxnQbGJcEn2pxYOHa2jfoVDTH3-nORN6CibRkUMbc4dZK2qSImd-82r9qHg5Qjs7bIJ7qtr1dJkbHyhl9ErCnR81LOm_HInd9RHYaANAcGh2EMnQcFjSB0_Z5wj687gM2BnSCnbNeepqrDI54e-bYKFjymGbAu1Lz2v8qZQEPGAq_IQy2aYz" />
+                            <button
+                                class="absolute top-1 right-1 bg-surface-container-highest/80 text-on-surface p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="material-symbols-outlined"
+                                    style="font-size: 14px;">close</span>
+                            </button>
+                        </div>
+                        <!-- Thumbnail 2 -->
+                        <div
+                            class="relative w-24 h-24 rounded-lg border border-outline-variant overflow-hidden group shrink-0 shadow-sm">
+                            <img class="w-full h-full object-cover"
+                                data-alt="A crisp, high-contrast screenshot of a financial dashboard showing upward trending line graphs in navy and light blue, set against a white background, representing business analytics."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGnVXdYvlwwCAIiUxULv8z4ayR14ZPDN2xr-9YR0sJYyxI_O0rrR16QBd6_qbseoEk3OWehzqsRo23aDMzQiHM1xTPwrabIpl9xPRRxEhsfrThTeiUQ-U6inqU6VZ66n0qj7BAbap7Ln2gPuFRkvD-pgCfkrfIjQqTmBWflgDA5hA7WPNdzx2JgiKxegh8wxTMtGkgdaUWJys5lyVMFgAN2oz219bXnf5gJSkNtibiiaIfi98f25oJ" />
+                            <button
+                                class="absolute top-1 right-1 bg-surface-container-highest/80 text-on-surface p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="material-symbols-outlined"
+                                    style="font-size: 14px;">close</span>
+                            </button>
+                        </div>
+                        <!-- Empty State Add -->
+                        <button
+                            class="w-24 h-24 rounded-lg border-2 border-dashed border-outline-variant flex flex-col items-center justify-center text-on-surface-variant hover:text-primary hover:border-primary hover:bg-primary-fixed/50 transition-colors shrink-0">
+                            <span class="material-symbols-outlined mb-1"
+                                style="font-size: 24px;">add</span>
+                            <span class="font-label-sm text-label-sm">Drop
+                                here</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Navigation Shell Suppression: This is a task-focused creation screen (New Summary), implying a temporary departure from main nav flow. Therefore, Top-level nav (BottomNavBar) should be suppressed or simplified, but keeping instructions strict to JSON:
+    However, the prompt asks to design the "Meeting Editor screen". According to the Shared Components Logic:
+    "Automatic Suppression: You MUST exclude the navigation shell if the page intent is: ... Task-Focused: Any sub-page featuring a 'Close' or 'Back' action that implies a temporary departure from the main navigation flow."
+    "If the user is in a focused journey... hide the shell to prioritize the Canvas."
+    
+    Therefore, I will omit the BottomNavBar to respect the Semantic Shell Mandate for a focused transactional editor screen. -->
+    </body></html>
+
+<!-- Meeting Editor -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>MeetSync - Planner</title>
+        <script
+            src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#eae7ef",
+                      "surface": "#fbf8ff",
+                      "secondary": "#505f76",
+                      "tertiary-fixed": "#ffdbd0",
+                      "on-secondary-container": "#54647a",
+                      "on-secondary-fixed": "#0b1c30",
+                      "tertiary-container": "#5c1800",
+                      "surface-container": "#efecf5",
+                      "inverse-primary": "#bdc2ff",
+                      "outline-variant": "#c6c5d4",
+                      "on-primary": "#ffffff",
+                      "on-surface": "#1b1b21",
+                      "inverse-surface": "#303036",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "on-error-container": "#93000a",
+                      "surface-variant": "#e4e1ea",
+                      "primary": "#000666",
+                      "tertiary-fixed-dim": "#ffb59d",
+                      "on-surface-variant": "#454652",
+                      "primary-container": "#1a237e",
+                      "primary-fixed": "#e0e0ff",
+                      "inverse-on-surface": "#f2eff8",
+                      "outline": "#767683",
+                      "on-primary-container": "#8690ee",
+                      "secondary-container": "#d0e1fb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "on-primary-fixed-variant": "#343d96",
+                      "error-container": "#ffdad6",
+                      "surface-container-low": "#f5f2fb",
+                      "secondary-fixed": "#d3e4fe",
+                      "on-tertiary-fixed-variant": "#7b2e12",
+                      "on-tertiary-fixed": "#390c00",
+                      "surface-container-highest": "#e4e1ea",
+                      "surface-tint": "#4c56af",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed": "#000767",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#fbf8ff",
+                      "on-background": "#1b1b21",
+                      "tertiary": "#380b00",
+                      "surface-dim": "#dbd9e1",
+                      "on-tertiary-container": "#e17c5a",
+                      "primary-fixed-dim": "#bdc2ff",
+                      "background": "#fbf8ff",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "xl": "48px",
+                      "gutter": "20px",
+                      "sm": "16px",
+                      "container-max": "1200px",
+                      "md": "24px",
+                      "xs": "8px",
+                      "lg": "32px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "headline-md-mobile": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md-mobile": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+        <style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+    </head>
+    <body
+        class="bg-background text-on-background font-body-lg antialiased pb-24 md:pb-0">
+        <!-- TopAppBar -->
+        <header
+            class="bg-surface dark:bg-background shadow-sm dark:shadow-none flex justify-between items-center w-full px-4 py-3 sticky top-0 z-50">
+            <div class="flex items-center gap-3">
+                <img class="w-10 h-10 rounded-full object-cover"
+                    data-alt="A professional headshot of a business executive in a modern light-filled office, representing a generic user avatar for a meeting app. The lighting is bright and clean, fitting a modern corporate style."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0BoR293c4ZC2VpwjYbRsx3_7FiQkRdmycHjYHekoNhs007BeKzesaeXij5DhWTFmUUyNNxl4JvGvKaNVbTcACruBiSCccowRxxcE6iMf3XRM_Ne60WHrGlYVwaYxYL8C9-gsRAmD9NWa1UCyuPaky9fSqq4Cmd59nCD5hL9T-VtSz_2z9oQE1e7Cas4k39g7w05Wjnm2vcANf6F-k8eaP96lxBRJKzI50ZP8RVfbFoZgVV5mr8nGH" />
+                <h1
+                    class="font-headline-md-mobile text-headline-md-mobile font-bold text-primary dark:text-inverse-primary tracking-tight">Planner</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <button
+                    class="p-2 rounded-full hover:bg-surface-variant dark:hover:bg-on-surface-variant/10 text-on-surface-variant dark:text-surface-variant transition-transform active:scale-95 duration-150">
+                    <span class="material-symbols-outlined" data-icon="search"
+                        data-weight="outline">search</span>
+                </button>
+                <button
+                    class="p-2 rounded-full hover:bg-surface-variant dark:hover:bg-on-surface-variant/10 text-on-surface-variant dark:text-surface-variant transition-transform active:scale-95 duration-150">
+                    <span class="material-symbols-outlined"
+                        data-icon="notifications"
+                        data-weight="outline">notifications</span>
+                </button>
+            </div>
+        </header>
+        <!-- Main Content -->
+        <main
+            class="max-w-container-max mx-auto px-sm md:px-md py-lg grid grid-cols-4 md:grid-cols-12 gap-md md:gap-gutter">
+            <!-- Calendar Section -->
+            <section
+                class="col-span-4 md:col-span-7 xl:col-span-8 flex flex-col gap-sm">
+                <div
+                    class="bg-surface-container-lowest rounded-xl shadow-[0_2px_8px_-2px_rgba(0,0,0,0.04)] p-md border border-surface-variant">
+                    <div class="flex justify-between items-center mb-sm">
+                        <h2
+                            class="font-headline-sm text-headline-sm text-on-surface">October
+                            2023</h2>
+                        <div class="flex gap-1">
+                            <button
+                                class="p-2 rounded-lg hover:bg-surface-variant text-on-surface-variant transition-colors">
+                                <span
+                                    class="material-symbols-outlined">chevron_left</span>
+                            </button>
+                            <button
+                                class="p-2 rounded-lg hover:bg-surface-variant text-on-surface-variant transition-colors">
+                                <span
+                                    class="material-symbols-outlined">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Calendar Grid -->
+                    <div
+                        class="grid grid-cols-7 gap-1 text-center font-label-md text-label-md mb-2">
+                        <div class="text-on-surface-variant py-2">M</div>
+                        <div class="text-on-surface-variant py-2">T</div>
+                        <div class="text-on-surface-variant py-2">W</div>
+                        <div class="text-on-surface-variant py-2">T</div>
+                        <div class="text-on-surface-variant py-2">F</div>
+                        <div
+                            class="text-on-surface-variant py-2 text-outline">S</div>
+                        <div
+                            class="text-on-surface-variant py-2 text-outline">S</div>
+                    </div>
+                    <div
+                        class="grid grid-cols-7 gap-1 text-center font-body-md text-body-md">
+                        <!-- Week 1 -->
+                        <div
+                            class="p-2 text-outline-variant cursor-default">25</div>
+                        <div
+                            class="p-2 text-outline-variant cursor-default">26</div>
+                        <div
+                            class="p-2 text-outline-variant cursor-default">27</div>
+                        <div
+                            class="p-2 text-outline-variant cursor-default">28</div>
+                        <div
+                            class="p-2 text-outline-variant cursor-default">29</div>
+                        <div
+                            class="p-2 text-outline-variant cursor-default">30</div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>1</span>
+                        </div>
+                        <!-- Week 2 -->
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>2</span>
+                            <div class="flex gap-1 mt-1"><div
+                                    class="w-1.5 h-1.5 rounded-full bg-primary-container"></div></div>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>3</span>
+                            <div class="flex gap-1 mt-1">
+                                <div
+                                    class="w-1.5 h-1.5 rounded-full bg-error"></div>
+                                <div
+                                    class="w-1.5 h-1.5 rounded-full bg-primary-container"></div>
+                            </div>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>4</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>5</span>
+                            <div class="flex gap-1 mt-1"><div
+                                    class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></div></div>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>6</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center text-outline">
+                            <span>7</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center text-outline">
+                            <span>8</span>
+                        </div>
+                        <!-- Week 3 -->
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>9</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg bg-primary-container text-on-primary font-bold cursor-pointer transition-colors shadow-sm relative flex flex-col items-center">
+                            <span>10</span>
+                            <div class="flex gap-1 mt-1">
+                                <div
+                                    class="w-1.5 h-1.5 rounded-full bg-on-primary"></div>
+                                <div
+                                    class="w-1.5 h-1.5 rounded-full bg-error-container"></div>
+                            </div>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>11</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>12</span>
+                            <div class="flex gap-1 mt-1"><div
+                                    class="w-1.5 h-1.5 rounded-full bg-primary-container"></div></div>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>13</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center text-outline">
+                            <span>14</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center text-outline">
+                            <span>15</span>
+                        </div>
+                        <!-- Week 4 -->
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>16</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>17</span>
+                            <div class="flex gap-1 mt-1"><div
+                                    class="w-1.5 h-1.5 rounded-full bg-error"></div></div>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>18</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>19</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center">
+                            <span>20</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center text-outline">
+                            <span>21</span>
+                        </div>
+                        <div
+                            class="p-2 rounded-lg hover:bg-surface-container cursor-pointer transition-colors relative flex flex-col items-center text-outline">
+                            <span>22</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Events List -->
+            <section
+                class="col-span-4 md:col-span-5 xl:col-span-4 flex flex-col gap-sm">
+                <h3
+                    class="font-headline-sm text-headline-sm text-on-surface mb-xs">Events
+                    for Oct 10</h3>
+                <div class="flex flex-col gap-xs">
+                    <!-- Meeting Card 1 -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-[0_2px_8px_-2px_rgba(0,0,0,0.04)] border border-surface-variant flex overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="w-1.5 bg-primary-container shrink-0"></div>
+                        <div class="p-4 flex-1 flex flex-col gap-2">
+                            <div class="flex justify-between items-start">
+                                <span
+                                    class="font-label-md text-label-md text-primary-container bg-primary-fixed/50 px-2 py-0.5 rounded-full">Project
+                                    Alpha</span>
+                                <span
+                                    class="font-label-sm text-label-sm text-on-surface-variant">09:00
+                                    - 10:30</span>
+                            </div>
+                            <h4
+                                class="font-body-lg text-body-lg font-semibold text-on-surface leading-tight">Q3
+                                Strategy Review</h4>
+                            <div class="flex items-center gap-2 mt-2">
+                                <div class="flex -space-x-2">
+                                    <img
+                                        class="w-6 h-6 rounded-full border border-surface-container-lowest"
+                                        data-alt="A small avatar showing a smiling businesswoman against a neutral corporate background."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpC9uFqGtx08U51mgVailtCeGlGcFb0jM8jkB_fCMuTD1orF-5xnzeNaXumCvYUNQsEUV8VV3--P1gWzXgB4334vUuEQ-5YuSCCCHl-dMegpUnHWrpHvGcbhKGyvpXP9abftQXUC3iXghDEzJUR86kzjtrRD9U0VynpY30ExYvP3rGKqppeaw7jwH_hRTjp9wEMg4A1iokyt8sISiizVYulhpuaxTDVGN9Yj68Oqma33_hNE3_lvQJ" />
+                                    <img
+                                        class="w-6 h-6 rounded-full border border-surface-container-lowest"
+                                        data-alt="A small avatar of a man with glasses looking professional."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJR4C497xRjY0vdUJcGZcLjUBLJho1-6QXyr-1JtoDFMArulwvb797v8hj329MFkyKLRAM3eJ7wPRUst5qfpcN-qzI4yQ9utjRHjZ_9onQjAA4WD80KcA3RDhsFxMAA7T1VbVRItXSpO_U5TuFL4MboyO5-p73ZTkG59oQWPJ7h0VeINvpSEgrvB07o20v4BIlFq6O6Sk71jziDBhfEGMvhSAHqleTkmzByk_1p5UUy5Z6m4dqUEb2" />
+                                    <div
+                                        class="w-6 h-6 rounded-full border border-surface-container-lowest bg-surface-container-high flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant">+3</div>
+                                </div>
+                                <span
+                                    class="font-label-sm text-label-sm text-outline flex items-center gap-1">
+                                    <span
+                                        class="material-symbols-outlined text-[14px]">videocam</span>
+                                    Virtual
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Meeting Card 2 -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-[0_2px_8px_-2px_rgba(0,0,0,0.04)] border border-surface-variant flex overflow-hidden group hover:shadow-md transition-shadow cursor-pointer">
+                        <div class="w-1.5 bg-error shrink-0"></div>
+                        <div class="p-4 flex-1 flex flex-col gap-2">
+                            <div class="flex justify-between items-start">
+                                <span
+                                    class="font-label-md text-label-md text-error bg-error-container/50 px-2 py-0.5 rounded-full">Urgent</span>
+                                <span
+                                    class="font-label-sm text-label-sm text-on-surface-variant">13:00
+                                    - 14:00</span>
+                            </div>
+                            <h4
+                                class="font-body-lg text-body-lg font-semibold text-on-surface leading-tight">Client
+                                Escalation: TechCorp</h4>
+                            <div class="flex items-center gap-2 mt-2">
+                                <div class="flex -space-x-2">
+                                    <img
+                                        class="w-6 h-6 rounded-full border border-surface-container-lowest bg-surface-variant"
+                                        data-alt="A generic corporate avatar placeholder showing a silhouette."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMqIJsLhQVDsM8U4GHlsPd053FiWdbp4HCNhd7EGVCtINmc67RRVdMC934Yq7H0I6aOfYhkplU4OL-IMlWigY-n5m5Tvv6zHyXgQUtbnrR1rFweN-7xTqWr27WcmET90otgn_Ht9Fzb6sIhgPT8WeeNVvhVZljroPjoUIE0RhTpj4bOgjqw7HgtCTNdG7vT2h63rw8v8xLYQrIAAHmMH9DnPKkAPQEH0BYpyrL_kRtMwnMUKCsGWsF" />
+                                </div>
+                                <span
+                                    class="font-label-sm text-label-sm text-outline flex items-center gap-1">
+                                    <span
+                                        class="material-symbols-outlined text-[14px]">meeting_room</span>
+                                    Room 4B
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button
+                    class="mt-4 bg-primary-container text-on-primary font-label-md text-label-md py-3 px-4 rounded-full shadow-sm hover:bg-primary-container/90 transition-colors flex items-center justify-center gap-2 w-full md:w-auto self-start">
+                    <span
+                        class="material-symbols-outlined text-[18px]">add</span>
+                    Add Event
+                </button>
+            </section>
+        </main>
+        <!-- BottomNavBar -->
+        <nav
+            class="md:hidden bg-surface-container-lowest dark:bg-surface-container shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.04)] fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2 rounded-t-xl transition-all duration-200 ease-in-out">
+            <button
+                class="flex flex-col items-center justify-center text-on-secondary-fixed-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg p-2 transition-colors w-16">
+                <span class="material-symbols-outlined mb-1"
+                    data-icon="home">home</span>
+                <span class="font-label-md text-label-md">Home</span>
+            </button>
+            <button
+                class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-5 py-1 w-20">
+                <span class="material-symbols-outlined mb-1"
+                    data-icon="calendar_today" data-weight="fill"
+                    style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+                <span class="font-label-md text-label-md">Planner</span>
+            </button>
+            <button
+                class="flex flex-col items-center justify-center text-on-secondary-fixed-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg p-2 transition-colors w-16">
+                <span class="material-symbols-outlined mb-1"
+                    data-icon="folder">folder</span>
+                <span class="font-label-md text-label-md">Projects</span>
+            </button>
+            <button
+                class="flex flex-col items-center justify-center text-on-secondary-fixed-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high dark:hover:bg-surface-variant rounded-lg p-2 transition-colors w-16">
+                <span class="material-symbols-outlined mb-1"
+                    data-icon="ios_share">ios_share</span>
+                <span class="font-label-md text-label-md">Export</span>
+            </button>
+        </nav>
+    </body></html>
+
+<!-- Planner Calendar -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>MeetSync - Settings</title>
+        <script
+            src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fbf8ff",
+                        "on-tertiary-fixed-variant": "#7b2e12",
+                        "tertiary-container": "#5c1800",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#8690ee",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "surface": "#fbf8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#767683",
+                        "secondary-container": "#d0e1fb",
+                        "surface-tint": "#4c56af",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed": "#e0e0ff",
+                        "primary-container": "#1a237e",
+                        "surface-variant": "#e4e1ea",
+                        "background": "#fbf8ff",
+                        "on-secondary-container": "#54647a",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#303036",
+                        "on-tertiary-container": "#e17c5a",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-primary-fixed": "#000767",
+                        "on-secondary-fixed": "#0b1c30",
+                        "outline-variant": "#c6c5d4",
+                        "surface-container-high": "#eae7ef",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "surface-dim": "#dbd9e1",
+                        "on-tertiary-fixed": "#390c00",
+                        "on-background": "#1b1b21",
+                        "on-error": "#ffffff",
+                        "surface-container": "#efecf5",
+                        "primary": "#000666",
+                        "on-surface-variant": "#454652",
+                        "surface-container-highest": "#e4e1ea",
+                        "on-tertiary": "#ffffff",
+                        "tertiary": "#380b00",
+                        "inverse-on-surface": "#f2eff8",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#343d96",
+                        "surface-container-low": "#f5f2fb",
+                        "on-surface": "#1b1b21",
+                        "inverse-primary": "#bdc2ff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "tertiary-fixed": "#ffdbd0",
+                        "secondary": "#505f76"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "xl": "48px",
+                        "gutter": "20px",
+                        "base": "4px",
+                        "lg": "32px",
+                        "md": "24px",
+                        "xs": "8px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md-mobile": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "headline-md-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+        <style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+        <style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+    </head>
+    <body class="min-h-screen flex flex-col font-body-md pb-24 md:pb-0">
+        <!-- TopAppBar -->
+        <header
+            class="w-full top-0 sticky bg-surface dark:bg-background shadow-sm z-40 bg-white dark:bg-surface-container">
+            <div
+                class="flex justify-between items-center px-gutter py-sm max-w-container-max mx-auto">
+                <div
+                    class="flex items-center gap-sm cursor-pointer active:opacity-80">
+                    <span
+                        class="material-symbols-outlined text-primary dark:text-primary-fixed"
+                        data-icon="menu">menu</span>
+                    <span
+                        class="font-display-lg text-display-lg text-primary dark:text-primary-fixed font-bold tracking-tight">MeetSync</span>
+                </div>
+                <div class="cursor-pointer active:opacity-80">
+                    <img alt="User profile avatar"
+                        class="w-10 h-10 rounded-full object-cover shadow-sm"
+                        data-alt="A professional headshot of a user against a neutral corporate background, conveying a sense of executive leadership in a modern, light-mode setting. Soft, even lighting highlights the subject's features."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1A5E0OfAKOjxc2h5M96UPVMgFG-TDYswTFbTqIXiMJKHA_8FkER3l74V_7NbDdECMwaPpe_HcLsUT3v8eugJf8Zle-4nH0fUoTCpuMnUuNfE6oWrACxEQyM66VZSpJV6KiKUBDbRsSdO-0Xy_6NMmChUUtaVHwgJBzJS78mpnJPiOieqyShigC6UsXNhBBRuLd9QhJMSSHJMkseuLykRnEcRLm4SjnZxdOkCRa75ByVSNPVeaMZY3" />
+                </div>
+            </div>
+        </header>
+        <main
+            class="flex-grow max-w-container-max mx-auto w-full p-4 md:p-gutter grid grid-cols-1 md:grid-cols-12 gap-md md:gap-lg">
+            <!-- NavigationDrawer (Web) -->
+            <nav
+                class="hidden md:flex md:col-span-3 flex-col bg-surface dark:bg-background border-r border-outline-variant h-[calc(100vh-80px)] sticky top-[80px] py-md">
+                <div
+                    class="px-md pb-md mb-md border-b border-outline-variant flex items-center gap-4">
+                    <img alt="Executive User Profile"
+                        class="w-12 h-12 rounded-full object-cover shadow-sm"
+                        data-alt="A professional headshot of an executive user against a neutral corporate background, conveying a sense of leadership in a modern, light-mode setting. Soft, even lighting highlights the subject's features."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfrmXJX3vVy1cpLfmdTq4cjwnA56S-QlzijvG98LfnYrotRYjDYREzeDjH5ekleQ5iYieXAoiZUK8jIxQkV2m7Ant84THdFAtaTsi9bB71Wl3qo7PNhX8k0ynbPegn0WQHXAMbKPNDPLEUA9mfAiWzIE7lktnCfaA_SMloqpjg_yqfH2CS24AC3u5SxvobRxuLvPw44R9M21wsMLa9p2TtwYJ5zItW-j8zbaLC8Lre5a2n3IX_XfJj" />
+                    <div>
+                        <div
+                            class="font-body-lg text-body-lg font-semibold text-primary">MeetSync
+                            Executive</div>
+                        <div
+                            class="font-label-md text-label-md text-on-surface-variant">Pro
+                            Plan Subscriber</div>
+                    </div>
+                </div>
+                <ul class="flex flex-col gap-2">
+                    <li><a
+                            class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low mx-2 rounded-full transition-all duration-200 ease-in-out font-body-lg text-body-lg"
+                            href="#"><span
+                                class="material-symbols-outlined">dashboard</span>
+                            Dashboard</a></li>
+                    <li><a
+                            class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low mx-2 rounded-full transition-all duration-200 ease-in-out font-body-lg text-body-lg"
+                            href="#"><span
+                                class="material-symbols-outlined">event_note</span>
+                            Meetings</a></li>
+                    <li><a
+                            class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low mx-2 rounded-full transition-all duration-200 ease-in-out font-body-lg text-body-lg"
+                            href="#"><span
+                                class="material-symbols-outlined">group</span>
+                            Contacts</a></li>
+                    <li><a
+                            class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-full mx-2 transition-all duration-200 ease-in-out font-body-lg text-body-lg font-semibold"
+                            href="#"><span
+                                class="material-symbols-outlined">settings</span>
+                            Settings</a></li>
+                </ul>
+            </nav>
+            <!-- Main Content Canvas -->
+            <div class="md:col-span-9 flex flex-col gap-lg">
+                <div class="mb-2">
+                    <h1
+                        class="font-headline-md text-headline-md md:font-display-lg md:text-display-lg text-primary mb-1">Settings</h1>
+                    <p
+                        class="font-body-md text-body-md text-on-surface-variant">Manage
+                        your groups, app preferences, and API integrations.</p>
+                </div>
+                <!-- Bento Grid Layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+                    <!-- Group & Contact Management -->
+                    <section
+                        class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 p-md flex flex-col gap-sm md:col-span-2">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span
+                                class="material-symbols-outlined text-primary-container">group</span>
+                            <h2
+                                class="font-headline-sm text-headline-sm text-on-surface">Group
+                                &amp; Contact Management</h2>
+                        </div>
+                        <p
+                            class="font-body-sm text-body-sm text-on-surface-variant mb-4">Organize
+                            your contacts into specific groups for faster
+                            meeting scheduling.</p>
+                        <div class="space-y-4">
+                            <div class="flex flex-col gap-2">
+                                <label
+                                    class="font-label-md text-label-md text-on-surface">Add
+                                    New Contact</label>
+                                <div class="flex gap-2">
+                                    <input
+                                        class="flex-grow rounded-lg border-outline-variant bg-surface px-3 py-2 font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 transition-all"
+                                        placeholder="Contact Name"
+                                        type="text" />
+                                    <button
+                                        class="bg-primary-container text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-primary transition-colors whitespace-nowrap">Add</button>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-4">
+                                <label
+                                    class="font-label-md text-label-md text-on-surface">Manage
+                                    Groups</label>
+                                <div class="flex flex-wrap gap-2">
+                                    <span
+                                        class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-full font-label-sm text-label-sm flex items-center gap-1">Executive
+                                        Team <span
+                                            class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error">close</span></span>
+                                    <span
+                                        class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-full font-label-sm text-label-sm flex items-center gap-1">Marketing
+                                        <span
+                                            class="material-symbols-outlined text-[14px] cursor-pointer hover:text-error">close</span></span>
+                                    <span
+                                        class="bg-surface-variant text-on-surface-variant px-3 py-1.5 rounded-full font-label-sm text-label-sm border border-outline-variant border-dashed cursor-pointer hover:bg-surface-container-high">+
+                                        New Group</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- App Customization -->
+                    <section
+                        class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 p-md flex flex-col gap-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span
+                                class="material-symbols-outlined text-primary-container">palette</span>
+                            <h2
+                                class="font-headline-sm text-headline-sm text-on-surface">App
+                                Customization</h2>
+                        </div>
+                        <p
+                            class="font-body-sm text-body-sm text-on-surface-variant mb-4">Adjust
+                            the look and feel of MeetSync.</p>
+                        <div class="space-y-4">
+                            <div class="flex flex-col gap-2">
+                                <label
+                                    class="font-label-md text-label-md text-on-surface">Theme
+                                    Preference</label>
+                                <select
+                                    class="rounded-lg border-outline-variant bg-surface px-3 py-2 font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 w-full">
+                                    <option value="light">Light Mode
+                                        (Default)</option>
+                                    <option value="dark">Dark Mode</option>
+                                    <option value="system">System
+                                        Default</option>
+                                </select>
+                            </div>
+                            <div class="flex flex-col gap-2 mt-2">
+                                <label
+                                    class="font-label-md text-label-md text-on-surface">Primary
+                                    Color Accent</label>
+                                <div class="flex gap-3 mt-1">
+                                    <button
+                                        class="w-8 h-8 rounded-full bg-primary-container ring-2 ring-offset-2 ring-primary-container cursor-pointer"></button>
+                                    <button
+                                        class="w-8 h-8 rounded-full bg-tertiary-container cursor-pointer opacity-70 hover:opacity-100 transition-opacity"></button>
+                                    <button
+                                        class="w-8 h-8 rounded-full bg-secondary cursor-pointer opacity-70 hover:opacity-100 transition-opacity"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- API Integration -->
+                    <section
+                        class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/30 p-md flex flex-col gap-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span
+                                class="material-symbols-outlined text-primary-container">code</span>
+                            <h2
+                                class="font-headline-sm text-headline-sm text-on-surface">API
+                                Integration</h2>
+                        </div>
+                        <p
+                            class="font-body-sm text-body-sm text-on-surface-variant mb-4">Configure
+                            your Appscript API endpoints.</p>
+                        <div class="space-y-4">
+                            <div class="flex flex-col gap-2">
+                                <label
+                                    class="font-label-md text-label-md text-on-surface">/exec
+                                    Endpoint URL</label>
+                                <input
+                                    class="rounded-lg border-outline-variant bg-surface px-3 py-2 font-body-md text-body-md focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 w-full text-on-surface-variant font-mono text-sm"
+                                    type="password"
+                                    value="https://script.google.com/macros/s/AKfycb..." />
+                            </div>
+                            <div
+                                class="flex items-center justify-between mt-4 p-3 bg-surface-container-low rounded-lg border border-outline-variant/50">
+                                <div>
+                                    <div
+                                        class="font-label-md text-label-md text-on-surface">Sync
+                                        Status</div>
+                                    <div
+                                        class="font-label-sm text-label-sm text-on-surface-variant">Last
+                                        sync: 2 mins ago</div>
+                                </div>
+                                <span
+                                    class="bg-secondary-fixed text-on-secondary-fixed px-2 py-1 rounded text-xs font-bold flex items-center gap-1"><span
+                                        class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+                                    Connected</span>
+                            </div>
+                            <button
+                                class="w-full mt-2 bg-surface text-primary-container border border-primary-container px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors">Test
+                                Connection</button>
+                        </div>
+                    </section>
+                    <!-- Save Action -->
+                    <div class="md:col-span-2 flex justify-end mt-4">
+                        <button
+                            class="bg-primary-container text-on-primary px-8 py-3 rounded-lg font-label-md text-label-md hover:bg-primary transition-colors shadow-sm">Save
+                            Changes</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- BottomNavBar (Mobile) -->
+        <nav
+            class="md:hidden fixed bottom-0 w-full z-50 bg-surface-container dark:bg-surface-container-highest flex justify-around items-center px-4 py-2 shadow-lg">
+            <a
+                class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant scale-95 active:scale-90 transition-transform rounded-lg p-2"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="home">home</span>
+                <span class="font-label-sm text-label-sm mt-1">Home</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant scale-95 active:scale-90 transition-transform rounded-lg p-2"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="calendar_today">calendar_today</span>
+                <span class="font-label-sm text-label-sm mt-1">Planner</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant scale-95 active:scale-90 transition-transform rounded-lg p-2"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="folder">folder</span>
+                <span class="font-label-sm text-label-sm mt-1">Projects</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 hover:bg-surface-variant scale-95 active:scale-90 transition-transform"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="settings">settings</span>
+                <span class="font-label-sm text-label-sm mt-1">Settings</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant scale-95 active:scale-90 transition-transform rounded-lg p-2"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="ios_share">ios_share</span>
+                <span class="font-label-sm text-label-sm mt-1">Export</span>
+            </a>
+        </nav>
+    </body></html>
+
+<!-- Settings -->
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>MeetSync - Export</title>
+        <script
+            src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary": "#ffffff",
+                      "surface-bright": "#fbf8ff",
+                      "on-tertiary-fixed-variant": "#7b2e12",
+                      "tertiary-container": "#5c1800",
+                      "primary-fixed-dim": "#bdc2ff",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#8690ee",
+                      "tertiary-fixed-dim": "#ffb59d",
+                      "surface": "#fbf8ff",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#767683",
+                      "secondary-container": "#d0e1fb",
+                      "surface-tint": "#4c56af",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#e0e0ff",
+                      "primary-container": "#1a237e",
+                      "surface-variant": "#e4e1ea",
+                      "background": "#fbf8ff",
+                      "on-secondary-container": "#54647a",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#303036",
+                      "on-tertiary-container": "#e17c5a",
+                      "secondary-fixed": "#d3e4fe",
+                      "on-primary-fixed": "#000767",
+                      "on-secondary-fixed": "#0b1c30",
+                      "outline-variant": "#c6c5d4",
+                      "surface-container-high": "#eae7ef",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "surface-dim": "#dbd9e1",
+                      "on-tertiary-fixed": "#390c00",
+                      "on-background": "#1b1b21",
+                      "on-error": "#ffffff",
+                      "surface-container": "#efecf5",
+                      "primary": "#000666",
+                      "on-surface-variant": "#454652",
+                      "surface-container-highest": "#e4e1ea",
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#380b00",
+                      "inverse-on-surface": "#f2eff8",
+                      "on-error-container": "#93000a",
+                      "on-primary-fixed-variant": "#343d96",
+                      "surface-container-low": "#f5f2fb",
+                      "on-surface": "#1b1b21",
+                      "inverse-primary": "#bdc2ff",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "tertiary-fixed": "#ffdbd0",
+                      "secondary": "#505f76"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "sm": "16px",
+                      "xl": "48px",
+                      "gutter": "20px",
+                      "base": "4px",
+                      "lg": "32px",
+                      "md": "24px",
+                      "xs": "8px",
+                      "container-max": "1200px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-md-mobile": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md-mobile": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8FAFC; /* Base canvas slate color from guidelines */
+        }
+    </style>
+        <style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+    </head>
+    <body class="text-on-surface pb-[80px] md:pb-0">
+        <!-- Padding for mobile bottom nav -->
+        <!-- TopAppBar (Visible on Mobile & Desktop as Header) -->
+        <header
+            class="bg-surface dark:bg-background text-primary dark:text-primary-fixed font-headline-md text-headline-md w-full top-0 sticky bg-white dark:bg-surface-container shadow-sm shadow-sm flex justify-between items-center px-gutter py-sm max-w-container-max mx-auto z-40">
+            <div class="flex items-center gap-md">
+                <div
+                    class="hidden md:flex cursor-pointer hover:bg-surface-container-high transition-colors active:opacity-80 p-xs rounded-full">
+                    <span class="material-symbols-outlined"
+                        data-icon="menu">menu</span>
+                </div>
+                <span
+                    class="font-display-lg text-display-lg text-primary dark:text-primary-fixed font-bold tracking-tight">MeetSync</span>
+            </div>
+            <div class="flex items-center gap-sm">
+                <div class="md:hidden">
+                    <span
+                        class="material-symbols-outlined text-primary cursor-pointer"
+                        data-icon="menu">menu</span>
+                </div>
+                <!-- Avatar Placeholder -->
+                <div
+                    class="w-[32px] h-[32px] rounded-full overflow-hidden border border-outline-variant cursor-pointer hover:opacity-80">
+                    <img alt="User profile avatar"
+                        class="object-cover w-full h-full"
+                        data-alt="A professional headshot of a business executive in a modern office environment. Soft, even studio lighting. High-resolution portrait suitable for a corporate profile avatar. The subject is smiling slightly, projecting confidence and approachability."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV2DKWZ2s0CwehTeSE4eaRx2BnxvYBGtHaekUe8DKGbvK1pFU_XaZm0rTGAKx_lZ9bdgFytM8bmzENd-4n52MWru-nRzztW5xmfoXFkrNyZVSXYOG3DBbL8He_9ys64gdz-xBpIwJvGEaqI4HhUjT1DgepocxGGHDpIFOOs1KMUfP2vwmI8cp89K9OKABiEvSTN1RJLpfIuIxZ8vqYgov1oshLxKAoC3Uw76jx68lzgg1WtwTv7LuE" />
+                </div>
+            </div>
+        </header>
+        <!-- Main Layout Grid -->
+        <div
+            class="max-w-container-max mx-auto px-gutter md:px-md py-lg grid grid-cols-4 md:grid-cols-12 gap-md items-start">
+            <!-- Desktop SideNav (Hidden on Mobile) -->
+            <nav
+                class="hidden md:flex md:col-span-3 lg:col-span-2 flex-col gap-xs sticky top-[100px]">
+                <a
+                    class="flex items-center gap-sm px-sm py-[12px] rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md text-body-md"
+                    href="#">
+                    <span class="material-symbols-outlined"
+                        data-icon="home">home</span>
+                    Home
+                </a>
+                <a
+                    class="flex items-center gap-sm px-sm py-[12px] rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md text-body-md"
+                    href="#">
+                    <span class="material-symbols-outlined"
+                        data-icon="calendar_today">calendar_today</span>
+                    Planner
+                </a>
+                <a
+                    class="flex items-center gap-sm px-sm py-[12px] rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md text-body-md"
+                    href="#">
+                    <span class="material-symbols-outlined"
+                        data-icon="folder">folder</span>
+                    Projects
+                </a>
+                <a
+                    class="flex items-center gap-sm px-sm py-[12px] rounded-lg bg-secondary-container text-on-secondary-container font-body-md text-body-md font-semibold"
+                    href="#">
+                    <span class="material-symbols-outlined"
+                        data-icon="ios_share">ios_share</span>
+                    Export
+                </a>
+                <a
+                    class="flex items-center gap-sm px-sm py-[12px] rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-body-md text-body-md"
+                    href="#">
+                    <span class="material-symbols-outlined"
+                        data-icon="settings">settings</span>
+                    Settings
+                </a>
+            </nav>
+            <!-- Main Content Canvas -->
+            <main
+                class="col-span-4 md:col-span-9 lg:col-span-10 flex flex-col gap-lg">
+                <!-- Page Header & Actions -->
+                <div
+                    class="flex flex-col md:flex-row justify-between items-start md:items-end gap-sm">
+                    <div>
+                        <h1
+                            class="font-headline-md text-headline-md text-on-surface mb-xs">Export
+                            Data</h1>
+                        <p
+                            class="font-body-md text-body-md text-on-surface-variant">Generate
+                            PDF or Image reports of your meeting summaries and
+                            action items.</p>
+                    </div>
+                </div>
+                <!-- Bento Grid Layout for Export Controls -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+                    <!-- Left Column: Export Configuration -->
+                    <div class="lg:col-span-2 flex flex-col gap-md">
+                        <!-- Format Selection Card -->
+                        <div
+                            class="bg-surface-container-lowest rounded-xl p-md shadow-[0_2px_8px_rgba(26,35,126,0.04)] border border-surface-container-low relative overflow-hidden">
+                            <div
+                                class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+                            <h2
+                                class="font-headline-sm text-headline-sm text-on-surface mb-sm flex items-center gap-xs">
+                                <span
+                                    class="material-symbols-outlined text-primary"
+                                    data-icon="description">description</span>
+                                Select Format
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+                                <!-- PDF Option -->
+                                <label
+                                    class="relative flex cursor-pointer rounded-lg border border-outline-variant bg-surface p-4 hover:bg-surface-container-low transition-colors focus-within:ring-2 focus-within:ring-primary focus-within:border-primary">
+                                    <input checked class="sr-only peer"
+                                        name="export_format" type="radio"
+                                        value="pdf" />
+                                    <div class="flex items-start gap-sm w-full">
+                                        <div
+                                            class="mt-1 flex-shrink-0 w-5 h-5 rounded-full border border-outline-variant peer-checked:border-primary peer-checked:border-[6px] transition-all"></div>
+                                        <div class="flex-1">
+                                            <div
+                                                class="flex items-center justify-between">
+                                                <span
+                                                    class="font-body-md text-body-md font-semibold text-on-surface">PDF
+                                                    Document</span>
+                                                <span
+                                                    class="material-symbols-outlined text-secondary"
+                                                    data-icon="picture_as_pdf">picture_as_pdf</span>
+                                            </div>
+                                            <p
+                                                class="font-label-md text-label-md text-on-surface-variant mt-xs font-normal">Best
+                                                for sharing detailed multi-page
+                                                reports and printing.</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-primary pointer-events-none"></div>
+                                </label>
+                                <!-- Image Option -->
+                                <label
+                                    class="relative flex cursor-pointer rounded-lg border border-outline-variant bg-surface p-4 hover:bg-surface-container-low transition-colors focus-within:ring-2 focus-within:ring-primary focus-within:border-primary">
+                                    <input class="sr-only peer"
+                                        name="export_format" type="radio"
+                                        value="image" />
+                                    <div class="flex items-start gap-sm w-full">
+                                        <div
+                                            class="mt-1 flex-shrink-0 w-5 h-5 rounded-full border border-outline-variant peer-checked:border-primary peer-checked:border-[6px] transition-all"></div>
+                                        <div class="flex-1">
+                                            <div
+                                                class="flex items-center justify-between">
+                                                <span
+                                                    class="font-body-md text-body-md font-semibold text-on-surface">High-Res
+                                                    Image (PNG)</span>
+                                                <span
+                                                    class="material-symbols-outlined text-secondary"
+                                                    data-icon="image">image</span>
+                                            </div>
+                                            <p
+                                                class="font-label-md text-label-md text-on-surface-variant mt-xs font-normal">Ideal
+                                                for single-page summaries to
+                                                share in chat or
+                                                presentations.</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="absolute inset-0 rounded-lg border-2 border-transparent peer-checked:border-primary pointer-events-none"></div>
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Filters Card -->
+                        <div
+                            class="bg-surface-container-lowest rounded-xl p-md shadow-[0_2px_8px_rgba(26,35,126,0.04)] border border-surface-container-low relative overflow-hidden">
+                            <div
+                                class="absolute top-0 left-0 w-1 h-full bg-secondary"></div>
+                            <h2
+                                class="font-headline-sm text-headline-sm text-on-surface mb-sm flex items-center gap-xs">
+                                <span
+                                    class="material-symbols-outlined text-secondary"
+                                    data-icon="filter_list">filter_list</span>
+                                Filter Content
+                            </h2>
+                            <div class="space-y-sm">
+                                <!-- Project Selection -->
+                                <div>
+                                    <label
+                                        class="block font-label-md text-label-md text-on-surface-variant mb-xs">Projects</label>
+                                    <div class="relative">
+                                        <select
+                                            class="w-full appearance-none bg-surface border border-outline-variant rounded-lg px-sm py-[10px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-shadow">
+                                            <option>All Active Projects</option>
+                                            <option>Q3 Marketing
+                                                Campaign</option>
+                                            <option>Alpha Product
+                                                Launch</option>
+                                            <option>Client Offboarding</option>
+                                        </select>
+                                        <span
+                                            class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-outline pointer-events-none"
+                                            data-icon="arrow_drop_down">arrow_drop_down</span>
+                                    </div>
+                                </div>
+                                <!-- Date Range -->
+                                <div>
+                                    <label
+                                        class="block font-label-md text-label-md text-on-surface-variant mb-xs">Date
+                                        Range</label>
+                                    <div class="grid grid-cols-2 gap-sm">
+                                        <div class="relative">
+                                            <input
+                                                class="w-full bg-surface border border-outline-variant rounded-lg px-sm py-[10px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-shadow"
+                                                type="date"
+                                                value="2023-10-01" />
+                                        </div>
+                                        <div class="relative">
+                                            <input
+                                                class="w-full bg-surface border border-outline-variant rounded-lg px-sm py-[10px] font-body-md text-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-shadow"
+                                                type="date"
+                                                value="2023-10-31" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Content Toggles -->
+                                <div>
+                                    <label
+                                        class="block font-label-md text-label-md text-on-surface-variant mb-xs">Include
+                                        Sections</label>
+                                    <div class="flex flex-wrap gap-xs">
+                                        <label class="cursor-pointer">
+                                            <input checked class="peer sr-only"
+                                                type="checkbox" />
+                                            <span
+                                                class="inline-block px-3 py-1 rounded-full bg-surface-container border border-outline-variant font-label-md text-label-md text-on-surface-variant peer-checked:bg-primary-fixed peer-checked:text-on-primary-fixed peer-checked:border-primary-fixed-dim transition-colors">Action
+                                                Items</span>
+                                        </label>
+                                        <label class="cursor-pointer">
+                                            <input checked class="peer sr-only"
+                                                type="checkbox" />
+                                            <span
+                                                class="inline-block px-3 py-1 rounded-full bg-surface-container border border-outline-variant font-label-md text-label-md text-on-surface-variant peer-checked:bg-primary-fixed peer-checked:text-on-primary-fixed peer-checked:border-primary-fixed-dim transition-colors">Executive
+                                                Summary</span>
+                                        </label>
+                                        <label class="cursor-pointer">
+                                            <input class="peer sr-only"
+                                                type="checkbox" />
+                                            <span
+                                                class="inline-block px-3 py-1 rounded-full bg-surface-container border border-outline-variant font-label-md text-label-md text-on-surface-variant peer-checked:bg-primary-fixed peer-checked:text-on-primary-fixed peer-checked:border-primary-fixed-dim transition-colors">Full
+                                                Transcript</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="mt-md pt-md border-t border-surface-container-high flex justify-end">
+                                <button
+                                    class="bg-[#1A237E] hover:bg-primary text-white font-label-md text-label-md px-lg py-[12px] rounded-lg transition-colors shadow-sm flex items-center gap-xs">
+                                    <span class="material-symbols-outlined"
+                                        data-icon="download">download</span>
+                                    Generate Export
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Right Column: Recent Exports & Quick Actions -->
+                    <div class="flex flex-col gap-md">
+                        <!-- Recent Exports Card -->
+                        <div
+                            class="bg-surface-container-lowest rounded-xl p-md shadow-[0_2px_8px_rgba(26,35,126,0.04)] border border-surface-container-low h-full flex flex-col">
+                            <h2
+                                class="font-headline-sm text-headline-sm text-on-surface mb-sm flex items-center gap-xs">
+                                <span
+                                    class="material-symbols-outlined text-outline"
+                                    data-icon="history">history</span>
+                                Recent Exports
+                            </h2>
+                            <div
+                                class="flex-1 space-y-xs overflow-y-auto pr-xs">
+                                <!-- Item 1 -->
+                                <div
+                                    class="p-sm rounded-lg hover:bg-surface-container-low transition-colors border border-transparent hover:border-surface-container-high flex justify-between items-center group cursor-pointer">
+                                    <div class="flex items-center gap-sm">
+                                        <div
+                                            class="w-8 h-8 rounded bg-error-container text-on-error-container flex items-center justify-center">
+                                            <span
+                                                class="material-symbols-outlined text-[18px]"
+                                                data-icon="picture_as_pdf">picture_as_pdf</span>
+                                        </div>
+                                        <div>
+                                            <p
+                                                class="font-body-md text-body-md font-medium text-on-surface truncate w-[140px]">Q3
+                                                Marketing Review</p>
+                                            <p
+                                                class="font-label-sm text-label-sm text-on-surface-variant">Today,
+                                                10:45 AM</p>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity"
+                                        data-icon="download">download</span>
+                                </div>
+                                <!-- Item 2 -->
+                                <div
+                                    class="p-sm rounded-lg hover:bg-surface-container-low transition-colors border border-transparent hover:border-surface-container-high flex justify-between items-center group cursor-pointer">
+                                    <div class="flex items-center gap-sm">
+                                        <div
+                                            class="w-8 h-8 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center">
+                                            <span
+                                                class="material-symbols-outlined text-[18px]"
+                                                data-icon="image">image</span>
+                                        </div>
+                                        <div>
+                                            <p
+                                                class="font-body-md text-body-md font-medium text-on-surface truncate w-[140px]">Weekly
+                                                Sync Summary</p>
+                                            <p
+                                                class="font-label-sm text-label-sm text-on-surface-variant">Yesterday</p>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity"
+                                        data-icon="download">download</span>
+                                </div>
+                                <!-- Item 3 -->
+                                <div
+                                    class="p-sm rounded-lg hover:bg-surface-container-low transition-colors border border-transparent hover:border-surface-container-high flex justify-between items-center group cursor-pointer">
+                                    <div class="flex items-center gap-sm">
+                                        <div
+                                            class="w-8 h-8 rounded bg-error-container text-on-error-container flex items-center justify-center">
+                                            <span
+                                                class="material-symbols-outlined text-[18px]"
+                                                data-icon="picture_as_pdf">picture_as_pdf</span>
+                                        </div>
+                                        <div>
+                                            <p
+                                                class="font-body-md text-body-md font-medium text-on-surface truncate w-[140px]">Client
+                                                Onboarding Notes</p>
+                                            <p
+                                                class="font-label-sm text-label-sm text-on-surface-variant">Oct
+                                                12, 2023</p>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity"
+                                        data-icon="download">download</span>
+                                </div>
+                            </div>
+                            <button
+                                class="mt-sm w-full py-[8px] font-label-md text-label-md text-primary border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors">
+                                View All History
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <!-- BottomNavBar (Visible only on Mobile) -->
+        <nav
+            class="md:hidden bg-surface-container dark:bg-surface-container-highest text-primary dark:text-primary-fixed font-label-md text-label-md font-display-lg text-display-lg text-primary fixed bottom-0 w-full z-50 bg-surface-container dark:bg-surface-container-highest shadow-lg fixed bottom-0 w-full flex justify-around items-center px-4 py-2 border-t-0 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+            <a
+                class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant scale-95 active:scale-90 transition-transform p-2 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="home">home</span>
+                <span class="mt-1 font-label-sm">Home</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant scale-95 active:scale-90 transition-transform p-2 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="calendar_today">calendar_today</span>
+                <span class="mt-1 font-label-sm">Planner</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant scale-95 active:scale-90 transition-transform p-2 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="folder">folder</span>
+                <span class="mt-1 font-label-sm">Projects</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 hover:bg-surface-variant scale-95 active:scale-90 transition-transform"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="ios_share">ios_share</span>
+                <span class="mt-1 font-label-sm font-bold">Export</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant scale-95 active:scale-90 transition-transform p-2 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="settings">settings</span>
+                <span class="mt-1 font-label-sm">Settings</span>
+            </a>
+        </nav>
+    </body></html>
+
+<!-- Export Center -->
+<!DOCTYPE html><html class="light" lang="en" style><head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <title>MeetSync - Project Detail</title>
+        <script
+            src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+            rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet">
+        <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error-container": "#93000a",
+                      "outline": "#767683",
+                      "surface-variant": "#e4e1ea",
+                      "tertiary-container": "#5c1800",
+                      "inverse-surface": "#303036",
+                      "surface-container-high": "#eae7ef",
+                      "on-error": "#ffffff",
+                      "primary": "#000666",
+                      "inverse-on-surface": "#f2eff8",
+                      "on-secondary-fixed-variant": "#38485d",
+                      "surface-dim": "#dbd9e1",
+                      "primary-fixed-dim": "#bdc2ff",
+                      "on-tertiary-fixed-variant": "#7b2e12",
+                      "surface": "#fbf8ff",
+                      "on-tertiary-container": "#e17c5a",
+                      "on-surface-variant": "#454652",
+                      "on-tertiary-fixed": "#390c00",
+                      "secondary-container": "#d0e1fb",
+                      "outline-variant": "#c6c5d4",
+                      "on-surface": "#1b1b21",
+                      "surface-container-highest": "#e4e1ea",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb59d",
+                      "on-primary-fixed": "#000767",
+                      "on-primary-container": "#8690ee",
+                      "on-primary": "#ffffff",
+                      "surface-bright": "#fbf8ff",
+                      "secondary": "#505f76",
+                      "inverse-primary": "#bdc2ff",
+                      "error-container": "#ffdad6",
+                      "on-background": "#1b1b21",
+                      "on-secondary-fixed": "#0b1c30",
+                      "secondary-fixed-dim": "#b7c8e1",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#380b00",
+                      "tertiary-fixed": "#ffdbd0",
+                      "surface-container": "#efecf5",
+                      "error": "#ba1a1a",
+                      "on-primary-fixed-variant": "#343d96",
+                      "surface-tint": "#4c56af",
+                      "surface-container-low": "#f5f2fb",
+                      "secondary-fixed": "#d3e4fe",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-container": "#54647a",
+                      "primary-fixed": "#e0e0ff",
+                      "primary-container": "#1a237e",
+                      "background": "#fbf8ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1200px",
+                      "xs": "8px",
+                      "gutter": "20px",
+                      "md": "24px",
+                      "xl": "48px",
+                      "base": "4px",
+                      "lg": "32px",
+                      "sm": "16px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "headline-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-md-mobile": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md-mobile": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+        <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+    </head>
+    <body class="bg-background text-on-background min-h-screen pb-24 md:pb-0">
+        <!-- Desktop Sidebar (Hidden on mobile) -->
+        <nav
+            class="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 border-r border-outline-variant bg-surface-container-lowest shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.04)] z-50">
+            <div class="p-6">
+                <div
+                    class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">MeetSync</div>
+            </div>
+            <div class="flex-1 px-4 py-2 space-y-2">
+                <a
+                    class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-150"
+                    href="#">
+                    <span class="material-symbols-outlined"
+                        data-icon="home">home</span>
+                    <span class="font-label-md text-label-md">Home</span>
+                </a>
+                <a
+                    class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-150"
+                    href="#">
+                    <span class="material-symbols-outlined"
+                        data-icon="calendar_today">calendar_today</span>
+                    <span class="font-label-md text-label-md">Planner</span>
+                </a>
+                <a
+                    class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-secondary-container text-on-secondary-container font-bold transition-colors duration-150"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="folder"
+                        style="font-variation-settings: 'FILL' 1;">folder</span>
+                    <span class="font-label-md text-label-md">Projects</span>
+                </a>
+                <a
+                    class="flex items-center space-x-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors duration-150"
+                    href="#">
+                    <span class="material-symbols-outlined"
+                        data-icon="ios_share">ios_share</span>
+                    <span class="font-label-md text-label-md">Export</span>
+                </a>
+            </div>
+            <div class="p-4 border-t border-outline-variant">
+                <div class="flex items-center space-x-3">
+                    <img
+                        class="w-10 h-10 rounded-full object-cover border border-outline-variant"
+                        data-alt="A small, professional headshot portrait of a confident executive smiling slightly, well-lit in a modern office environment, wearing business casual attire. The image is a clear, high-resolution profile picture."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-L8-xlS0zpl8N3AhzsbayIwenC_l4eqHGGRt3r4rnuIJnYzJetrXWlRwkH4iIX7kEBsXpEt9hE-PvSVcLwsfR9f-pCIfcRQaT4IkAnC6e_WQ9rDnQz9NfdleEFq1U95LrlQk_hsKH0WJjj_hwuEWciloS3pq5e1ymz-2mbHSAyZfuR4i9guBrbPDWEnp_p_ZDFO9byZDBX7pzI-HqEmn94KrHEsjwSsQS27a_dQh2J7BbVMvbvvqJ">
+                    <div class="flex flex-col">
+                        <span
+                            class="font-body-md text-body-md font-medium text-on-surface">Alex
+                            Johnson</span>
+                        <span
+                            class="font-label-sm text-label-sm text-on-surface-variant">Director</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <main class="md:ml-64 relative min-h-screen flex flex-col">
+            <!-- Top App Bar -->
+            <header
+                class="flex justify-between items-center w-full px-4 py-3 sticky top-0 z-50 bg-surface dark:bg-background shadow-sm dark:shadow-none docked full-width top-0">
+                <div class="flex items-center gap-3">
+                    <button
+                        class="md:hidden p-2 rounded-full hover:bg-surface-variant transition-colors text-on-surface-variant">
+                        <span class="material-symbols-outlined"
+                            data-icon="arrow_back">arrow_back</span>
+                    </button>
+                    <div
+                        class="font-headline-sm text-headline-sm-mobile md:text-headline-sm font-bold text-on-surface tracking-tight">Project
+                        Alpha</div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button
+                        class="p-2 rounded-full hover:bg-surface-variant transition-colors text-on-surface-variant">
+                        <span class="material-symbols-outlined"
+                            data-icon="more_vert">more_vert</span>
+                    </button>
+                </div>
+            </header>
+            <!-- Main Content Area -->
+            <div
+                class="flex-1 w-full max-w-[1200px] mx-auto p-4 md:p-6 lg:p-8 flex flex-col gap-6">
+                <!-- Search & Filters -->
+                <section class="flex flex-col md:flex-row gap-4 w-full">
+                    <div class="relative flex-1">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline"
+                            data-icon="search">search</span>
+                        <input
+                            class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-body-md text-body-md text-on-surface placeholder:text-outline transition-all"
+                            placeholder="Search meetings..." type="text">
+                    </div>
+                    <div
+                        class="flex gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+                        <select
+                            class="px-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary font-body-md text-body-md text-on-surface-variant cursor-pointer appearance-none min-w-[120px]">
+                            <option value="all">All Time</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                        <select
+                            class="px-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg focus:outline-none focus:border-primary font-body-md text-body-md text-on-surface-variant cursor-pointer appearance-none min-w-[120px]">
+                            <option value="all">All Types</option>
+                            <option value="strategy">Strategy</option>
+                            <option value="standup">Standup</option>
+                            <option value="review">Review</option>
+                        </select>
+                    </div>
+                </section>
+                <!-- Meeting List Grid -->
+                <section
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                    <!-- Card 1: High Priority -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-[0_4px_12px_-4px_rgba(0,0,0,0.04)] border border-surface-variant overflow-hidden flex flex-col relative group hover:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.08)] transition-all duration-200">
+                        <div
+                            class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+                        <div class="p-5 flex flex-col h-full gap-4 pl-6">
+                            <div class="flex justify-between items-start">
+                                <span
+                                    class="inline-flex items-center px-2 py-0.5 rounded text-label-sm font-label-sm font-medium bg-error-container text-on-error-container">High
+                                    Priority</span>
+                                <span
+                                    class="material-symbols-outlined text-outline-variant"
+                                    data-icon="attachment">attachment</span>
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-headline-sm text-headline-sm text-on-surface mb-1">Q3
+                                    Strategy Review</h3>
+                                <div
+                                    class="flex items-center text-on-surface-variant font-body-md text-body-md gap-1">
+                                    <span
+                                        class="material-symbols-outlined text-[16px]"
+                                        data-icon="event">event</span>
+                                    <span class>Oct 10, 2023 • 09:00 -
+                                        10:30</span>
+                                </div>
+                            </div>
+                            <div
+                                class="mt-auto pt-4 border-t border-surface-variant flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-30"
+                                        data-alt="A headshot of a smiling professional woman in her 30s with dark hair, wearing a navy blazer, against a clean light gray background."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrFZs5te0-aLcjc7K1CQ-YGONwdcNElMZ8R0Zzk2-bu7ffPkNxsvuWMwnk5eazSzsQCASzBN0e4uirQnQBAam5ddxw5JqgGtTxRFX7WXmFndykPw9eG_ntG_NDsd2BDo3zIBwLAMLCVGaRwinkbJ0wnPPgFGS-gbsq5NjuW9jiHg-84P5Zn4qxS7AOHUuqquugJg6UMZunktBq7jJXRp_ca2yEhmx0Mea5K81Ngfs-VsM6Hz1R7egb">
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-20"
+                                        data-alt="A headshot of a mature professional man with glasses and grey hair, wearing a white shirt and subtle patterned tie, neutral background."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrcP_7f-lFBQlSWhpFsAlI2uJJESDIfzsHHOmFAO-5pFi1F7CM5FV1ImvVTXj3fPHAPN4dv9ycS5riQNZZqx5jd-QIp7QRHBld0Ono7ZuXPibSIynlz1i14jVvSg1K5DxIE9v5cWbwG_D816TU5de7WyNhXh_Ez7im-KmU32EsoP_kP7dDAqHQmz2EofSwSzNuA1TrW2Ls9mCj0xyb3i2iypTYxSZyA_J4ECc6McTl0M26lDx_s6jM">
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-10"
+                                        data-alt="A headshot of a young professional man with short curly hair, wearing a casual light blue button-down shirt, warmly lit office background."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8YAHAyQaN8FB8vT3B0eU6MDtdhsNw5L0ygfRA_Wd4_GnU4HDOvB_CQX-DiTdBvS-U8EXGhc1kmMJoXBIEVAq0tFY6hTSt7Nu8eiCjXHLgEbZvxYRhaziMF1sH3DhM12r20hOwtvZtWzDLELVRc92bBGCImrIB8FbKv8nZ4UyOUQzNW3H-4DVNDsLRMZavHnRaGc5T9MD_ig9N3zetzfPcP52cWbBTLjOU-2XX2fxNz_Xj8_U1AwAF">
+                                    <div
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest bg-surface-variant flex items-center justify-center font-label-sm text-label-sm text-on-surface-variant z-0">+2</div>
+                                </div>
+                                <p
+                                    class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-2">Discussed
+                                    market expansion plans for Q4 and reviewed
+                                    budget allocations for the upcoming
+                                    marketing campaign.</p><button
+                                    onclick="document.getElementById('delete-modal').classList.remove('hidden')"
+                                    class="flex items-center justify-center p-2 rounded-full text-outline hover:text-error hover:bg-error-container transition-colors mr-2">
+                                    <span
+                                        class="material-symbols-outlined text-[20px]">delete</span>
+                                </button><button
+                                    class="text-primary hover:text-primary-container font-label-md text-label-md transition-colors">View
+                                    Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 2: Medium Priority -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-[0_4px_12px_-4px_rgba(0,0,0,0.04)] border border-surface-variant overflow-hidden flex flex-col relative group hover:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.08)] transition-all duration-200">
+                        <div
+                            class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary-container"></div>
+                        <div class="p-5 flex flex-col h-full gap-4 pl-6">
+                            <div class="flex justify-between items-start">
+                                <span
+                                    class="inline-flex items-center px-2 py-0.5 rounded text-label-sm font-label-sm font-medium bg-tertiary-fixed text-on-tertiary-fixed">Medium
+                                    Priority</span>
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-headline-sm text-headline-sm text-on-surface mb-1">Weekly
+                                    Engineering Sync</h3>
+                                <div
+                                    class="flex items-center text-on-surface-variant font-body-md text-body-md gap-1">
+                                    <span
+                                        class="material-symbols-outlined text-[16px]"
+                                        data-icon="event">event</span>
+                                    <span class>Oct 12, 2023 • 11:00 -
+                                        12:00</span>
+                                </div>
+                            </div>
+                            <div
+                                class="mt-auto pt-4 border-t border-surface-variant flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-20"
+                                        data-alt="A headshot of a mature professional man with glasses and grey hair, wearing a white shirt and subtle patterned tie, neutral background."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoveeXdUHkA4-LdmZSFOeD-Uh4rnAGaox1YXTd-g61Ry2ovbmCt4J7rZ-AxPEfPLhOGijup5eZZAlXVdMMiXPZka0G6jy2mzmoma69Ns47s5ObO2kf21VT0KMieFO7exavEmwACcpPVbXLdApDCJJHE1M6Znm8O53lhMP3p59dGmobJy_cy_eWUYF6LJ9x7v9MqKF55d9GE4vkQupxCv0-BO8PWuHZE6SKUrqLQPp0YPkXX9TbCrR5">
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-10"
+                                        data-alt="A headshot of a young professional man with short curly hair, wearing a casual light blue button-down shirt, warmly lit office background."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXguGT1ENZO40NB8ikkWCYxZNb9DgYAF2VUlEaaxVBTOAh6tgg7tA8kWYgVsrSIhB9fmnV0x7NUS-SM5yCVtAB5yvTXKQPQp53JF-xfYElH6hB3QPquDqng_FY-lnO2bofAFTG-_pMXi2bYukEHmYNGA3sSLadkVlpumNYoPmeMSqIxyypA1d4IG4UnlCmLEsQK3im0lzZ9FL6f3j80auFj6bwu61i4AR8c6ARO6al2xuiMeI-bTuS">
+                                </div>
+                                <p
+                                    class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-2">Sprint
+                                    planning session for the new mobile app
+                                    features. Reviewed bug reports from the last
+                                    release.</p><button
+                                    onclick="document.getElementById('delete-modal').classList.remove('hidden')"
+                                    class="flex items-center justify-center p-2 rounded-full text-outline hover:text-error hover:bg-error-container transition-colors mr-2">
+                                    <span
+                                        class="material-symbols-outlined text-[20px]">delete</span>
+                                </button><button
+                                    class="text-primary hover:text-primary-container font-label-md text-label-md transition-colors">View
+                                    Details</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card 3: Low Priority -->
+                    <div
+                        class="bg-surface-container-lowest rounded-xl shadow-[0_4px_12px_-4px_rgba(0,0,0,0.04)] border border-surface-variant overflow-hidden flex flex-col relative group hover:shadow-[0_8px_24px_-8px_rgba(0,0,0,0.08)] transition-all duration-200">
+                        <div
+                            class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+                        <div class="p-5 flex flex-col h-full gap-4 pl-6">
+                            <div class="flex justify-between items-start">
+                                <span
+                                    class="inline-flex items-center px-2 py-0.5 rounded text-label-sm font-label-sm font-medium bg-secondary-fixed text-on-secondary-fixed">Low
+                                    Priority</span>
+                                <span
+                                    class="material-symbols-outlined text-outline-variant"
+                                    data-icon="notes">notes</span>
+                            </div>
+                            <div>
+                                <h3
+                                    class="font-headline-sm text-headline-sm text-on-surface mb-1">Design
+                                    System Update</h3>
+                                <div
+                                    class="flex items-center text-on-surface-variant font-body-md text-body-md gap-1">
+                                    <span
+                                        class="material-symbols-outlined text-[16px]"
+                                        data-icon="event">event</span>
+                                    <span class>Oct 15, 2023 • 14:00 -
+                                        15:00</span>
+                                </div>
+                            </div>
+                            <div
+                                class="mt-auto pt-4 border-t border-surface-variant flex justify-between items-center">
+                                <div class="flex -space-x-2">
+                                    <img
+                                        class="w-8 h-8 rounded-full border-2 border-surface-container-lowest object-cover z-30"
+                                        data-alt="A headshot of a smiling professional woman in her 30s with dark hair, wearing a navy blazer, against a clean light gray background."
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2UQviubhURdOIkAdLsB1pzn5f5sSrnFbo1kxavpgFf8Qm6UnNjcGWJRlRm9nAoFz9uYrTmq1IXp4iEOK8qNTHGY3wuD0vBuTHo-UWiIVZIYYvWnz0dc4lLM3sLSVUAxoTci9VDNF8UzrG2F1dU0U2fkunmsjXsZ-NTPlL_2Y162b41OkVxif_KX0zWK7zFV1lwNy37-BDkE-t0qXvwnvVAnoLyT1jP2mZJT_xWvs0jqht1UUg5NkU">
+                                </div>
+                                <p
+                                    class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-2">Finalized
+                                    the typography scale and color palette for
+                                    the dark mode theme. Reviewed the new
+                                    component library.</p><button
+                                    onclick="document.getElementById('delete-modal').classList.remove('hidden')"
+                                    class="flex items-center justify-center p-2 rounded-full text-outline hover:text-error hover:bg-error-container transition-colors mr-2">
+                                    <span
+                                        class="material-symbols-outlined text-[20px]">delete</span>
+                                </button><button
+                                    class="text-primary hover:text-primary-container font-label-md text-label-md transition-colors">View
+                                    Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <!-- Bottom Navigation Bar (Mobile Only) -->
+        <nav
+            class="md:hidden bg-surface-container-lowest dark:bg-surface-container shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.04)] docked full-width bottom-0 rounded-t-xl fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-2">
+            <a
+                class="flex flex-col items-center justify-center text-on-secondary-fixed-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 ease-in-out p-2 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="home">home</span>
+                <span class="font-label-md text-label-md mt-1">Home</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center text-on-secondary-fixed-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 ease-in-out p-2 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="calendar_today">calendar_today</span>
+                <span class="font-label-md text-label-md mt-1">Planner</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-5 py-1 transition-all duration-200 ease-in-out"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="folder"
+                    data-weight="fill"
+                    style="font-variation-settings: 'FILL' 1;">folder</span>
+                <span class="font-label-md text-label-md mt-1">Projects</span>
+            </a>
+            <a
+                class="flex flex-col items-center justify-center text-on-secondary-fixed-variant dark:text-on-secondary-fixed-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 ease-in-out p-2 rounded-lg"
+                href="#">
+                <span class="material-symbols-outlined"
+                    data-icon="ios_share">ios_share</span>
+                <span class="font-label-md text-label-md mt-1">Export</span>
+            </a>
+        </nav>
+        <style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+
+        <div id="delete-modal"
+            class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-on-surface/40 backdrop-blur-sm">
+            <div
+                class="bg-surface-container-lowest p-6 rounded-xl shadow-xl max-w-sm w-full mx-4 border border-outline-variant">
+                <div class="flex flex-col gap-4">
+                    <div class="flex items-center gap-3 text-primary">
+                        <span class="material-symbols-outlined">lock</span>
+                        <h3 class="font-headline-sm text-headline-sm">Secure
+                            Delete</h3>
+                    </div>
+                    <p
+                        class="font-body-md text-body-md text-on-surface-variant">Please
+                        enter your Security PIN to confirm deletion of this
+                        meeting.</p>
+                    <div class="flex flex-col gap-2">
+                        <label
+                            class="font-label-md text-label-md text-on-surface">Security
+                            PIN</label>
+                        <input type="password" maxlength="6"
+                            placeholder="••••••"
+                            class="w-full px-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-1 focus:ring-primary focus:border-primary text-center text-headline-md tracking-[0.5em] outline-none">
+                    </div>
+                    <div class="flex gap-3 mt-2">
+                        <button
+                            onclick="document.getElementById('delete-modal').classList.add('hidden')"
+                            class="flex-1 px-4 py-2 rounded-lg border border-outline-variant font-label-md text-label-md text-on-surface-variant hover:bg-surface-variant transition-colors">Cancel</button>
+                        <button
+                            onclick="document.getElementById('delete-modal').classList.add('hidden'); alert('Meeting deleted successfully (simulated)')"
+                            class="flex-1 px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md hover:bg-primary-container transition-colors">Confirm
+                            Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div></body></html>
