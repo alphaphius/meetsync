@@ -1,8 +1,10 @@
-// App Script ID (project ID) — edit here or in Settings UI.
-// Full /exec URL: https://script.google.com/macros/s/{ID}/exec
+// Apps Script web-app deployment URL.
+// Note: modern Apps Script uses the *deployment ID* in the URL, not the project ID.
+// Find it via: Clasp → `clasp deployments`, or the Apps Script UI → Deployments.
+// Override anytime in the app UI (Settings → API Endpoint).
 export const APP_SCRIPT_ID = '1OEa-bEnytmI0uumOaKST4u8fZnMnuAkmFkx6_byw4J5DE4tb1eBzvXbg';
 
-export const DEFAULT_EXEC_URL = `https://script.google.com/macros/s/${APP_SCRIPT_ID}/exec`;
+export const DEFAULT_EXEC_URL = 'https://script.google.com/macros/s/AKfycby0yBQsZ9asgmGNUbeOLz0y5GhXTRpMFSdP0WB_Cef-MLO6o0ZkgtmR2892bxgwXd7Y/exec';
 
 const EXEC_KEY = 'ms.execUrl';
 

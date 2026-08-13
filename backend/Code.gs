@@ -96,7 +96,7 @@ function ensureAll() {
 }
 
 function ensureSheet(name, headers) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = getSS();
   var sh = ss.getSheetByName(name);
   if (!sh) {
     sh = ss.insertSheet(name);
@@ -120,7 +120,27 @@ function ensureConfig(key, value) {
 }
 
 /* ---------- Sheet helpers ---------- */
-function SS() { return SpreadsheetApp.getActiveSpreadsheet(); }
+var SS_ID_KEY = 'SPREADSHEET_ID';
+var ssCache = null;
+
+// Works for BOTH bound scripts and standalone scripts.
+// Bound: returns the container spreadsheet.
+// Standalone: creates (or reuses) a dedicated spreadsheet, stored in Script Properties.
+function getSS() {
+  if (ssCache) return ssCache;
+  var active = SpreadsheetApp.getActiveSpreadsheet();
+  if (active) { ssCache = active; return active; }
+  var id = PropertiesService.getScriptProperties().getProperty(SS_ID_KEY);
+  if (id) {
+    try { ssCache = SpreadsheetApp.openById(id); return ssCache; } catch (e) {}
+  }
+  var created = SpreadsheetApp.create('MeetSync_Data');
+  PropertiesService.getScriptProperties().setProperty(SS_ID_KEY, created.getId());
+  ssCache = created;
+  return created;
+}
+
+function SS() { return getSS(); }
 function PROJECTS() { return SS().getSheetByName('Projects'); }
 function MEETINGS() { return SS().getSheetByName('Meetings'); }
 function CONTACTS() { return SS().getSheetByName('Contacts'); }
