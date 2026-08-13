@@ -35,14 +35,17 @@
   </style>
 </head>
 <body>
-  <div id="app" role="application">
-    <div class="skeleton-shell" aria-hidden="true">
-      <div class="sk-bar"><div class="sk sk-logo"></div><div class="sk sk-ico"></div></div>
-      <div class="sk sk-h"></div>
-      <div class="sk-row"><div class="sk sk-card"></div><div class="sk sk-card"></div><div class="sk sk-card" style="display:none"></div></div>
-      <div class="sk sk-h" style="width:30%"></div>
-      <div class="sk sk-card" style="height:88px"></div>
-      <div class="sk sk-card" style="height:88px"></div>
+  <div id="shell">
+    <aside class="hidden md:flex" data-sidebar aria-label="Sidebar navigation"></aside>
+    <div id="app" role="application">
+      <div class="skeleton-shell" aria-hidden="true">
+        <div class="sk-bar"><div class="sk sk-logo"></div><div class="sk sk-ico"></div></div>
+        <div class="sk sk-h"></div>
+        <div class="sk-row"><div class="sk sk-card"></div><div class="sk sk-card"></div><div class="sk sk-card" style="display:none"></div></div>
+        <div class="sk sk-h" style="width:30%"></div>
+        <div class="sk sk-card" style="height:88px"></div>
+        <div class="sk sk-card" style="height:88px"></div>
+      </div>
     </div>
   </div>
   <script type="module" src="/src/main.js"></script>

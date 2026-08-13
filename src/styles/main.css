@@ -7,6 +7,12 @@
     -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
   }
+  #shell { min-height: 100dvh; }
+  @media (min-width: 768px) {
+    #shell { display: flex; }
+    [data-sidebar] { position: sticky; top: 0; height: 100dvh; flex-shrink: 0; }
+    #app { flex: 1; min-width: 0; }
+  }
   body {
     font-family: var(--font-sans);
     background: rgb(var(--background));

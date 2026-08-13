@@ -58,6 +58,46 @@ export function fabHTML(href, label = 'Add') {
   return `<a href="${href}" class="fab bottom-6 right-6 md:bottom-8 md:right-8" aria-label="${label}">${icon('add', 'text-[26px]')}</a>`;
 }
 
+/* ---------------- Desktop Sidebar ---------------- */
+export function initSidebar() {
+  const aside = document.querySelector('[data-sidebar]');
+  if (!aside) return () => {};
+  aside.innerHTML = `
+    <div class="flex flex-col h-full w-[240px] shrink-0 px-3 py-4 border-r border-outline-variant/50 bg-surface-container-lowest">
+      <a href="#/" class="flex items-center gap-2.5 px-3 mb-6 h-12" aria-label="MeetSync home">
+        <span class="w-9 h-9 rounded-xl bg-primary text-on-primary flex items-center justify-center text-[20px] font-extrabold">M</span>
+        <span class="text-lg font-bold text-on-surface tracking-tight">MeetSync</span>
+      </a>
+      <nav class="flex flex-col gap-1" data-sidebar-nav>
+        ${NAV_ITEMS.map((it) => `
+          <a href="${it.href}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant hover:bg-surface-container-high" data-route="${it.key}">
+            <span class="material-symbols-outlined text-[22px]">${it.icon}</span>
+            <span class="text-sm font-medium">${it.label}</span>
+          </a>`).join('')}
+      </nav>
+      <div class="mt-auto px-3 pt-4 text-[12px] text-outline">MeetSync · Google Sheets sync</div>
+    </div>`;
+  return (activeKey) => {
+    aside.querySelectorAll('[data-route]').forEach((a) => {
+      const on = a.dataset.route === activeKey;
+      a.classList.toggle('bg-primary-container', on);
+      a.classList.toggle('text-on-primary-container', on);
+      a.classList.toggle('text-on-surface-variant', !on);
+      a.classList.toggle('hover:bg-surface-container-high', !on);
+      a.querySelector('span.material-symbols-outlined')?.classList.toggle('font-bold', on);
+    });
+  };
+}
+
+export function activeKeyFromHash(hash) {
+  const p = String(hash || '/').replace(/^#/, '').split('?')[0];
+  if (p.startsWith('/planner')) return 'planner';
+  if (p.startsWith('/projects')) return 'projects';
+  if (p.startsWith('/export')) return 'export';
+  if (p.startsWith('/settings')) return 'settings';
+  return 'home';
+}
+
 /* ---------------- Sync Indicator ---------------- */
 export function initSyncIndicator() {
   const el = document.createElement('div');
