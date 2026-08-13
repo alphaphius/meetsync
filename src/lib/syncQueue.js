@@ -125,8 +125,9 @@ async function runOp(op) {
       const withFiles = [];
       for (const a of attachments) {
         if (a.data) {
-          const f = await api.uploadImage({ name: a.name, mime: a.mime, data: a.data });
-          withFiles.push({ fileId: f.id, name: a.name, mime: a.mime, size: a.size, url: f.url });
+          const res = await api.uploadImage({ name: a.name, mime: a.mime, data: a.data });
+          if (!res || !res.ok || !res.file) throw new Error('Image upload failed');
+          withFiles.push({ fileId: res.file.id, name: a.name, mime: a.mime, size: a.size, url: res.file.url });
         } else {
           withFiles.push(a);
         }
