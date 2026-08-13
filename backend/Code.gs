@@ -233,7 +233,7 @@ function writeConfig(key, value) {
 
 function readSettings() {
   var out = {};
-  readAll(SETTINGS()).forEach(function (r) { if (r.key) out[r.key] = r.value; });
+  readAll(SETTINGS()).forEach(function (r) { if (r.key && r.key !== 'deletePin' && r.key !== 'pin') out[r.key] = r.value; });
   out.pin = getPin();
   out.attachmentsFolderId = getConfig(FOLDER_ID_KEY);
   return out;

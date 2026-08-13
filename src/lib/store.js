@@ -63,12 +63,15 @@ export const store = {
   },
   reset() { state = structuredClone(defaults); persist(); this.emit(); },
   hydrate(data) {
+    const settings = data.settings ? { ...data.settings } : null;
+    if (settings && settings.pin != null) settings.deletePin = settings.pin;
     state = {
       ...state,
       projects: data.projects ?? state.projects,
       meetings: data.meetings ?? state.meetings,
       contacts: data.contacts ?? state.contacts,
       groups: data.groups ?? state.groups,
+      settings: settings ? { ...state.settings, ...settings } : state.settings,
       serverTime: data.serverTime ?? null,
       status: 'online',
     };

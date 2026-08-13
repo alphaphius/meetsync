@@ -76,7 +76,7 @@ export default {
           <section class="card p-5">
             <h2 class="flex items-center gap-2 text-[15px] font-semibold text-on-surface mb-4">${icon('lock', 'text-primary-container')} Security</h2>
             <label class="text-[12px] font-medium text-on-surface block mb-1.5">Delete PIN (4–6 digits)</label>
-            <input data-pin type="password" inputmode="numeric" maxlength="6" class="input" placeholder="••••" value="${escapeHtml(set.deletePin || '0000')}" />
+            <input data-pin type="password" inputmode="numeric" maxlength="6" class="input" placeholder="••••" value="${escapeHtml(set.pin ?? set.deletePin ?? '0000')}" />
             <p class="text-[11px] text-outline mt-2">Required before deleting meetings or projects.</p>
           </section>
 
@@ -204,8 +204,8 @@ export default {
     const queueSave = () => {
       clearTimeout(saveTimer);
       saveTimer = setTimeout(() => {
-        const pin = pinInput.value.trim() || set.deletePin || '0000';
-        store.setSettings({ userName: nameInput.value.trim(), deletePin: pin });
+        const pin = pinInput.value.trim() || (set.pin ?? set.deletePin ?? '0000');
+        store.setSettings({ userName: nameInput.value.trim(), deletePin: pin, pin });
         queue.enqueueSettingsSave({ theme: store.get().settings.theme, accent: store.get().settings.accent, userName: nameInput.value.trim(), deletePin: pin });
         toast.show('Settings saved.', 'success');
       }, 600);

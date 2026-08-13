@@ -205,7 +205,9 @@ export default {
         if (!f.type.startsWith('image/')) { toast.show(`"${f.name}" is not an image.`, 'error'); continue; }
         if (f.size > 8 * 1024 * 1024) { toast.show(`"${f.name}" is over 8MB.`, 'error'); continue; }
         const preview = URL.createObjectURL(f);
-        state.attachments.push({ preview, name: f.name, mime: f.type, size: f.size });
+        const data = await new Promise((res) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = () => res(null); r.readAsDataURL(f); });
+        if (!data) { toast.show(`"${f.name}" could not be read.`, 'error'); continue; }
+        state.attachments.push({ preview, data, name: f.name, mime: f.type, size: f.size });
       }
       renderAttachments();
       saveDraft();
