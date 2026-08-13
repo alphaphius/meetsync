@@ -80,14 +80,14 @@ export default {
                 <input data-participant class="input pl-9 py-2 text-[13px]" placeholder="Add names or emails…" autocomplete="off" />
               </div>
               <div data-participants class="flex flex-wrap gap-1.5 min-h-[28px]"></div>
-              <div class="flex gap-2">
-                <div class="relative flex-1">
+              <div class="grid grid-cols-2 gap-2">
+                <div class="relative min-w-0">
                   ${icon('calendar_today', 'absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]')}
-                  <input data-date type="date" value="${escapeHtml(date)}" class="input pl-9 py-2 text-[13px]" />
+                  <input data-date type="date" value="${escapeHtml(date)}" class="input pl-9 py-2 text-[13px] min-w-0" />
                 </div>
-                <div class="relative flex-1">
+                <div class="relative min-w-0">
                   ${icon('schedule', 'absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]')}
-                  <input data-time type="time" value="${escapeHtml(time)}" class="input pl-9 py-2 text-[13px]" />
+                  <input data-time type="time" value="${escapeHtml(time)}" class="input pl-9 py-2 text-[13px] min-w-0" />
                 </div>
               </div>
             </div>
@@ -223,15 +223,10 @@ export default {
     partInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ',') {
         e.preventDefault();
-        const name = partInput.value.trim();
-        if (name) {
-          state.participants.push({ id: uid('p'), name });
-          partInput.value = '';
-          renderParticipants();
-          saveDraft();
-        }
+        commitParticipant();
       }
     });
+    partInput.addEventListener('blur', commitParticipant);
     partBox.addEventListener('click', (e) => {
       const chip = e.target.closest('[data-part]');
       if (!chip) return;
@@ -239,6 +234,15 @@ export default {
       renderParticipants();
       saveDraft();
     });
+
+    function commitParticipant() {
+      const name = partInput.value.trim();
+      if (!name) return;
+      state.participants.push({ id: uid('p'), name });
+      partInput.value = '';
+      renderParticipants();
+      saveDraft();
+    }
 
     /* toolbar */
     root.querySelector('[data-toolbar]').addEventListener('mousedown', (e) => e.preventDefault());
@@ -309,6 +313,7 @@ export default {
     root.querySelector('[data-save]').addEventListener('click', () => doSave());
 
     function doSave() {
+      commitParticipant();
       if (!state.title.trim()) {
         toast.show('Please enter a meeting title.', 'warn');
         titleInput.focus();

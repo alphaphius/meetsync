@@ -2,6 +2,7 @@
 
 import DashboardView from './views/DashboardView.js';
 import EditorView from './views/EditorView.js';
+import MeetingView from './views/MeetingView.js';
 import PlannerView from './views/PlannerView.js';
 import ProjectsView from './views/ProjectsView.js';
 import ProjectDetailView from './views/ProjectDetailView.js';
@@ -12,7 +13,8 @@ const routes = [
   { path: '/', view: DashboardView },
   { path: '/planner', view: PlannerView },
   { path: '/meetings/new', view: EditorView },
-  { path: '/meetings/:id', view: EditorView },
+  { path: '/meetings/:id/edit', view: EditorView },
+  { path: '/meetings/:id', view: MeetingView },
   { path: '/projects', view: ProjectsView },
   { path: '/projects/:id', view: ProjectDetailView },
   { path: '/export', view: ExportView },
@@ -64,6 +66,14 @@ export function render() {
 export function init(appRoot) {
   root = appRoot;
   window.addEventListener('hashchange', render);
+  // Global delegated handler for back buttons (views render them via backButton()).
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-back]')) {
+      e.preventDefault();
+      if (window.history.length > 1) history.back();
+      else location.hash = '/';
+    }
+  });
   render();
   return {
     current: () => current,
